@@ -23,18 +23,19 @@ async def on_ready():
              help='Rolls the dice. Command example "!dice 2 6" where player rolls 2 dices of 6 sides')
 async def roll(ctx, number_of_dice: int, number_of_sides: int):
     author = ctx.message.author.display_name
-    message_back = Dandy.roll(number_of_dice, number_of_sides)
-    await ctx.send(f'{author} rolls ' + message_back)
+    message_back = Dandy.roll(number_of_dice, number_of_sides, author)
+    await ctx.send(message_back)
 
 
-@bot.command(name='join_voice')
+@bot.command(name='join_voice',
+             help='Commands bot to join a voice channel in which you are now. Requires a DM role')
 async def join(ctx):
-    if 'Admin' not in ctx.message.author.roles:
-        await ctx.send("Only Admin can use this command!")
+    if 'DM' not in ctx.message.author.roles:
+        await ctx.send("Only DM can use this command!")
         return
 
     if not ctx.message.author.voice:
-        await ctx.send("{} is not connected to a voice channel".format(ctx.message.author.name))
+        await ctx.send(f'{ctx.message.author.name} is not connected to a voice channel')
         return
 
     channel = ctx.message.author.voice.channel
