@@ -2,7 +2,7 @@
 
 Simple bot that will throw dices, chose music and track location.
 
-*You need to create a token file called 'token' in order to run it.*
+*Bot token should be set as an environment variable called "Token"*
 
 Application Utilizes docker functionality:
 
