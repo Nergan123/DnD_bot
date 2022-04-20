@@ -1,13 +1,14 @@
 import os
 import random
+from config import settings
 from dotenv import load_dotenv
-from discord.ext import commands, tasks
+from discord.ext import commands
 from Dandy import Dandy_bot
 
 
 load_dotenv()
 token = os.getenv('Token')
-bot = commands.Bot(command_prefix='!')
+bot = commands.Bot(command_prefix = settings['prefix'])
 Dandy = Dandy_bot()
 
 
@@ -16,13 +17,10 @@ async def on_ready():
     print(f'{bot.user.name} has connected to Discord!')
 
 
-@bot.command(name='roll_dice', help='Simulates rolling dice.')
+@bot.command(name='dice', help='Rolls the dice. Command example "!dice 2 6"')
 async def roll(ctx, number_of_dice: int, number_of_sides: int):
-    dice = [
-        str(random.choice(range(1, number_of_sides + 1)))
-        for _ in range(number_of_dice)
-    ]
-    await ctx.send(', '.join(dice))
+    Dandy.roll(number_of_dice, number_of_sides)
+    await ctx.send()
 
 
 if __name__ == "__main__":
