@@ -2,6 +2,9 @@ import os
 from config import settings
 from dotenv import load_dotenv
 from discord.ext import commands
+from discord.utils import get
+from discord import FFmpegPCMAudio
+from discord import TextChannel
 from Dandy import Dandy_bot
 
 
@@ -22,6 +25,24 @@ async def roll(ctx, number_of_dice: int, number_of_sides: int):
     author = ctx.message.author.display_name
     message_back = Dandy.roll(number_of_dice, number_of_sides)
     await ctx.send(f'{author} rolls ' + message_back)
+
+
+@bot.command(name='join_voice')
+async def join(ctx):
+    if 'Admin' not in ctx.message.author.roles:
+        await ctx.send("Only Admin can use this command!")
+        return
+
+    if not ctx.message.author.voice:
+        await ctx.send("{} is not connected to a voice channel".format(ctx.message.author.name))
+        return
+
+    channel = ctx.message.author.voice.channel
+    voice = get(bot.voice_clients, guild=ctx.guild)
+    if voice and voice.is_connected():
+        await voice.move_to(channel)
+    else:
+        voice = await channel.connect()
 
 
 if __name__ == "__main__":
