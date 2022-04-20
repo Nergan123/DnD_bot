@@ -2,7 +2,9 @@
 
 Simple bot that will throw dices, chose music and track location.
 
-Utilizes docker
+*You need to create a token file called 'token' in order to run it.*
+
+Application Utilizes docker functionality:
 
 ```
 docker build --tag dnd .
