@@ -1,15 +1,14 @@
-import discord
 import os
-from discord.ext import commands,tasks
 from dotenv import load_dotenv
+from Dandy import Dandy_bot
 
-load_dotenv()
-TOKEN = os.getenv('Token')
 
-client = discord.Client()
+def main():
+    load_dotenv()
+    token = os.getenv('Token')
+    bot = Dandy_bot(token)
+    bot.awaken()
 
-@client.event
-async def on_ready():
-    print('Ready to rock!!!')
 
-client.run(TOKEN)
+if __name__ == "__main__":
+    main()
