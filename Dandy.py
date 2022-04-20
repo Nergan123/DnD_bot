@@ -11,6 +11,8 @@ class Dandy_bot:
         output = ''
 
         for throw in range(number_of_dice):
-            output = output + ' ' + str(random.choice(range(1, number_of_sides+1)))
+            roll = random.choice(range(1, number_of_sides+1))
+            output = output + ' ' + str(roll)
+            self.rolls.append(roll)
 
         return output
