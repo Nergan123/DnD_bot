@@ -16,12 +16,12 @@ class Dandy_bot:
             throw_list = self.dice_comments[self.dice_comments.dice == roll]
             line = throw_list.sample()
             self.rolls.append(roll)
-            output = line.iloc[0]['comment'] + f' {user} rolls ' + str(roll)
+            output = line.iloc[0]['comment'] + '**' + f' {user} rolls ' + str(roll) + '**'
         else:
             for throw in range(number_of_dice):
                 roll = random.choice(range(1, number_of_sides+1))
                 output = output + ' ' + str(roll)
                 self.rolls.append(roll)
-            output = f'{user} rolls ' + str(roll)
+            output = '**' + f'{user} rolls ' + output + '**'
 
         return output

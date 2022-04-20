@@ -20,7 +20,7 @@ async def on_ready():
 
 
 @bot.command(name='dice',
-             help='Rolls the dice. Command example "!dice 2 6" where player rolls 2 dices of 6 sides')
+             help='Rolls the dice. Command example "!dice 2 6" where player rolls 2d6')
 async def roll(ctx, number_of_dice: int, number_of_sides: int):
     author = ctx.message.author.display_name
     message_back = Dandy.roll(number_of_dice, number_of_sides, author)
