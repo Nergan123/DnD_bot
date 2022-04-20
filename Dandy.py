@@ -11,6 +11,6 @@ class Dandy_bot:
         output = ''
 
         for throw in range(number_of_dice):
-            pass
+            output = output + ' ' + str(random.choice(range(1, number_of_sides+1)))
 
         return output
