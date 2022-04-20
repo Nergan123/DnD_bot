@@ -15,6 +15,7 @@ class Dandy_bot:
             output = output + ' ' + str(roll)
             throw_list = self.dice_comments[self.dice_comments.dice == roll]
             line = throw_list.sample()
+            self.rolls.append(roll)
             output = line.iloc[0]['comment'] + f' {user} rolls ' + str(roll)
         else:
             for throw in range(number_of_dice):
