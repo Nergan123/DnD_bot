@@ -20,17 +20,19 @@ async def on_ready():
 
 
 @bot.command(name='dice',
-             help='Rolls the dice. Command example "!dice 2 6" where player rolls 2d6')
-async def roll(ctx, number_of_dice: int, number_of_sides: int):
+             help='Rolls the dice. Command example "!dice 2d6"')
+async def roll(ctx, message):
+    message = message.split('d')
     author = ctx.message.author.display_name
-    message_back = Dandy.roll(number_of_dice, number_of_sides, author)
+    message_back = Dandy.roll(int(message[0]), int(message[1]), author)
     await ctx.send(message_back)
 
 
 @bot.command(name='join_voice',
              help='Commands bot to join a voice channel in which you are now. Requires a DM role')
 async def join(ctx):
-    if 'DM' not in ctx.message.author.roles:
+    role = get(ctx.guild.roles, name="DM")
+    if role not in ctx.message.author.roles:
         await ctx.send("Only DM can use this command!")
         return
 
@@ -44,6 +46,46 @@ async def join(ctx):
         await voice.move_to(channel)
     else:
         voice = await channel.connect()
+
+
+@bot.command(name='leave_voice',
+             help='Commands bot to leave a voice channel. Requires a DM role')
+async def leave(ctx):
+    role = get(ctx.guild.roles, name="DM")
+    if role not in ctx.message.author.roles:
+        await ctx.send("Only DM can use this command!")
+        return
+
+    if not ctx.message.author.voice:
+        await ctx.send(f'{ctx.message.author.name} is not connected to a voice channel')
+        return
+
+    if ctx.voice_client:
+        await ctx.guild.voice_client.disconnect()
+    else:
+        await ctx.send("I'm not in a voice channel")
+
+
+@bot.command(name='play', help='Plays music of current location. DM role required.')
+async def play(ctx):
+    role = get(ctx.guild.roles, name="DM")
+    if role not in ctx.message.author.roles:
+        await ctx.send("Only DM can use this command!")
+        return
+
+    voice = get(bot.voice_clients, guild=ctx.guild)
+    name = Dandy.music()
+    song = os.path.join(Dandy.campaign_path, 'music', name)
+    voice.play(FFmpegPCMAudio(song, executable="ffmpeg_util\\win\\ffmpeg.exe"))
+
+
+@bot.command(name='pause', help='Pauses the music.')
+async def pause(ctx):
+    voice = get(bot.voice_clients, guild=ctx.guild)
+    if voice.is_playing():
+        voice.pause()
+    else:
+        await ctx.send("No audio is playing.")
 
 
 if __name__ == "__main__":

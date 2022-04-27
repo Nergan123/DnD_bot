@@ -1,9 +1,19 @@
 import random
+import os
 import pandas as pd
+import youtube_dl
+from parser import *
 
 
 class Dandy_bot:
-    def __init__(self):
+    def __init__(self, campaign=''):
+        if campaign == '':
+            self.campaign = 'nergan_campaign'
+        else:
+            self.campaign = campaign
+
+        self.parser = Parser()
+        self.campaign_path = os.path.join(os.getcwd(), 'campaign', self.campaign)
         self.location = ''
         self.rolls = []
         self.dice_comments = pd.read_csv('comments_data/dice_comments.csv', delimiter=';')
@@ -25,3 +35,28 @@ class Dandy_bot:
             output = '**' + f'{user} rolls ' + output + '**'
 
         return output
+
+    def music(self):
+        path = os.path.join(self.campaign_path, 'music')
+        if not os.path.isdir(path):
+            os.makedirs(path)
+        url, name = self.parser.get_music()
+        file_name = os.path.join(path, name)
+        files = os.listdir(path)
+        ydl_opts = {
+            'format': 'bestaudio/best',
+            'outtmpl': file_name,
+            'postprocessors': [{
+                'key': 'FFmpegExtractAudio',
+                'preferredcodec': 'mp3',
+                'preferredquality': '192',
+            }],
+        }
+        if name not in files:
+            with youtube_dl.YoutubeDL(ydl_opts) as ydl:
+                ydl.download([url])
+        return name
+
+# TODO add Iriy location to xml
+# TODO init to download songs
+# TODO ffmpeg for linux
