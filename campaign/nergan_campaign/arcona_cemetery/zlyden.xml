@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <npc>
+        <Name>Zlyden'</Name>
+        <Image>arcona_cemetery\\zlyden.jpg</Image>
+        <Mechanics>None</Mechanics>
+        <Bestiary>Zlyden' is a spirit which brings sorrow to people. It may haunt the whole house and slowly drive those who live there mad. That spirit usually serves to Nav'ya.</Bestiary>
+    </npc>
+</root>
