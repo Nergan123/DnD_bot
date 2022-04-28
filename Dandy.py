@@ -1,7 +1,6 @@
-import random
 import os
+
 import pandas as pd
-import youtube_dl
 from parser import *
 
 
@@ -12,11 +11,23 @@ class Dandy_bot:
         else:
             self.campaign = campaign
 
-        self.parser = Parser()
+        self.parser = Parser(self.campaign)
         self.campaign_path = os.path.join(os.getcwd(), 'campaign', self.campaign)
         self.location = ''
+        self.locations_list = self.parser.get_all_locations()
         self.rolls = []
         self.dice_comments = pd.read_csv('comments_data/dice_comments.csv', delimiter=';')
+
+    def set_campaign(self, campaign=''):
+        if campaign in os.listdir('campaign'):
+            self.campaign = campaign
+            self.parser = Parser(self.campaign)
+            self.campaign_path = os.path.join(os.getcwd(), 'campaign', self.campaign)
+            self.location = ''
+            self.locations_list = self.parser.get_all_locations()
+            return True
+        else:
+            return False
 
     def roll(self, number_of_dice, number_of_sides, user=''):
         output = ''
@@ -36,27 +47,13 @@ class Dandy_bot:
 
         return output
 
-    def music(self):
-        path = os.path.join(self.campaign_path, 'music')
-        if not os.path.isdir(path):
-            os.makedirs(path)
-        url, name = self.parser.get_music()
-        file_name = os.path.join(path, name)
-        files = os.listdir(path)
-        ydl_opts = {
-            'format': 'bestaudio/best',
-            'outtmpl': file_name,
-            'postprocessors': [{
-                'key': 'FFmpegExtractAudio',
-                'preferredcodec': 'mp3',
-                'preferredquality': '192',
-            }],
-        }
-        if name not in files:
-            with youtube_dl.YoutubeDL(ydl_opts) as ydl:
-                ydl.download([url])
-        return name
+    def set_location(self, name):
+        if name not in self.locations_list:
+            return False
+        else:
+            self.location = name
+            return True
+
 
 # TODO add Iriy location to xml
-# TODO init to download songs
 # TODO ffmpeg for linux

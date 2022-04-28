@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
-    <location name="Arcona">
+    <location Name="Arcona">
         <music_calm>
-            <url Name="tavern.mp3">https://www.youtube.com/watch?v=fIY55V0Tblk</url>
-            <url Name="city_medieval.mp3">https://www.youtube.com/watch?v=3XafIPEPW6M</url>
+            <url>https://www.youtube.com/watch?v=fIY55V0Tblk</url>
+            <url>https://www.youtube.com/watch?v=Da9S9yjZZP4</url>
         </music_calm>
         <music_battle>
-            <url Name="tavern.mp3">https://www.youtube.com/watch?v=fIY55V0Tblk</url>
+            <url>https://www.youtube.com/watch?v=lAGm9MTyRJ8</url>
         </music_battle>
         <Boss>
             tmp

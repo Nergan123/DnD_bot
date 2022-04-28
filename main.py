@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 from discord.ext import commands
 from discord.utils import get
 from discord import FFmpegPCMAudio
-from discord import TextChannel
+from youtube_dl import YoutubeDL
 from Dandy import Dandy_bot
 
 
@@ -73,10 +73,25 @@ async def play(ctx):
         await ctx.send("Only DM can use this command!")
         return
 
+    if not ctx.voice_client:
+        await ctx.send("I'm not in a voice client")
+
+    YDL_OPTIONS = {'format': 'bestaudio', 'noplaylist': 'True'}
+    FFMPEG_OPTIONS = {
+        'before_options': '-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5',
+        'options': '-vn', 'executable': 'ffmpeg_util\\win\\ffmpeg.exe'}
     voice = get(bot.voice_clients, guild=ctx.guild)
-    name = Dandy.music()
-    song = os.path.join(Dandy.campaign_path, 'music', name)
-    voice.play(FFmpegPCMAudio(song, executable="ffmpeg_util\\win\\ffmpeg.exe"))
+    url = Dandy.parser.get_music()
+    if not voice.is_playing():
+        with YoutubeDL(YDL_OPTIONS) as ydl:
+            info = ydl.extract_info(url, download=False)
+        URL = info['url']
+        voice.play(FFmpegPCMAudio(URL, **FFMPEG_OPTIONS))
+        voice.is_playing()
+
+    else:
+        await ctx.send("Bot is already playing")
+        return
 
 
 @bot.command(name='pause', help='Pauses the music.')
@@ -86,6 +101,47 @@ async def pause(ctx):
         voice.pause()
     else:
         await ctx.send("No audio is playing.")
+
+
+@bot.command(name='resume', help='Resumes music.')
+async def resume(ctx):
+    voice = get(bot.voice_clients, guild=ctx.guild)
+    if voice.is_paused():
+        voice.resume()
+    else:
+        await ctx.send("Music is not paused.")
+
+
+@bot.command(name='set_campaign', help='Sets campaign. DM role required.')
+async def set_campaign(ctx, name=''):
+    role = get(ctx.guild.roles, name="DM")
+    if role not in ctx.message.author.roles:
+        await ctx.send("Only DM can use this command!")
+        return
+
+    if name == '':
+        await ctx.send("Name can't be blank")
+        return
+    out = Dandy.set_campaign(name)
+    if out:
+        await ctx.send(f'Campaign set to {name}')
+    else:
+        await ctx.send(f'Campaign {name} not found')
+
+
+@bot.command(name='set_location', help='Sets current location. DM role required.')
+async def location(ctx, name=''):
+    role = get(ctx.guild.roles, name="DM")
+    if role not in ctx.message.author.roles:
+        await ctx.send("Only DM can use this command!")
+        return
+
+    out = Dandy.set_location(name)
+    if out:
+        await pause(ctx)
+        await ctx.send(f"Current location set to {name}")
+    else:
+        await ctx.send(f"I can't find a location named {name}")
 
 
 if __name__ == "__main__":
