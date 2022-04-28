@@ -8,7 +8,7 @@
         <music_battle>
             <url>https://www.youtube.com/watch?v=lAGm9MTyRJ8</url>
         </music_battle>
-        <NPC name="Guard">guard.xml</NPC>
+        <NPC name="Guard">guard_arcona.xml</NPC>
     </location>
     <location Name="Arcona_cemetery" image='arcona_cemetery.jpg'>
         <music_calm>
