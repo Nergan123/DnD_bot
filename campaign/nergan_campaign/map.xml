@@ -24,5 +24,6 @@
         <NPC name="Upyr">arcona_cemetery\\upyr.xml</NPC>
         <NPC name="Zlyden">arcona_cemetery\\zlyden.xml</NPC>
         <NPC name="Navya">arcona_cemetery\\navya.xml</NPC>
+        <NPC name="Keeper">arcona_cemetery\\keeper.xml</NPC>
     </location>
 </root>
