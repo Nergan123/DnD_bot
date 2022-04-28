@@ -1,5 +1,4 @@
 import os
-
 import pandas as pd
 from parser import *
 
@@ -15,8 +14,12 @@ class Dandy_bot:
         self.campaign_path = os.path.join(os.getcwd(), 'campaign', self.campaign)
         self.location = ''
         self.locations_list = self.parser.get_all_locations()
-        self.rolls = []
+        self.encounter = ''
         self.dice_comments = pd.read_csv('comments_data/dice_comments.csv', delimiter=';')
+        self.name_npc = ''
+        self.bestiary = ''
+        self.image = ''
+        self.mechanics = ''
 
     def set_campaign(self, campaign=''):
         if campaign in os.listdir('campaign'):
@@ -61,6 +64,15 @@ class Dandy_bot:
 
     def get_location_image(self):
         return self.parser.get_location_image(self.location)
+
+    def interaction(self, name):
+        npc_xml = self.parser.get_npc(self.location, name)
+        if npc_xml:
+            self.name_npc, self.image, self.mechanics, self.bestiary = self.parser.get_npc_info(npc_xml)
+            self.image = os.path.join(self.campaign_path, self.image)
+            return True
+        else:
+            return False
 
 
 # TODO add Iriy location to xml

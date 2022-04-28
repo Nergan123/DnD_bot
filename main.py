@@ -154,5 +154,22 @@ async def location(ctx, name=''):
         await ctx.send(f"I can't find a location named {name}")
 
 
+@bot.command(name='interaction', help='Starts an interaction with npc. DM role required.')
+async def interaction(ctx, name: str):
+    role = get(ctx.guild.roles, name="DM")
+    if role not in ctx.message.author.roles:
+        await ctx.send("Only DM can use this command!")
+        return
+
+    out = Dandy.interaction(name)
+    if out:
+        await ctx.send(f'You meet {Dandy.name_npc}')
+        with open(Dandy.image, 'rb') as f:
+            picture = File(f)
+            await ctx.send(file=picture)
+    else:
+        await ctx.send("I can't find this npc")
+
+
 if __name__ == "__main__":
     bot.run(token)
