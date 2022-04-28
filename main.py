@@ -4,6 +4,7 @@ from dotenv import load_dotenv
 from discord.ext import commands
 from discord.utils import get
 from discord import FFmpegPCMAudio
+from discord import File
 from youtube_dl import YoutubeDL
 from Dandy import Dandy_bot
 
@@ -81,7 +82,7 @@ async def play(ctx):
         'before_options': '-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5',
         'options': '-vn', 'executable': 'ffmpeg_util\\win\\ffmpeg.exe'}
     voice = get(bot.voice_clients, guild=ctx.guild)
-    url = Dandy.parser.get_music()
+    url = Dandy.get_url()
     if not voice.is_playing():
         with YoutubeDL(YDL_OPTIONS) as ydl:
             info = ydl.extract_info(url, download=False)
@@ -99,8 +100,6 @@ async def pause(ctx):
     voice = get(bot.voice_clients, guild=ctx.guild)
     if voice.is_playing():
         voice.pause()
-    else:
-        await ctx.send("No audio is playing.")
 
 
 @bot.command(name='resume', help='Resumes music.')
@@ -138,8 +137,19 @@ async def location(ctx, name=''):
 
     out = Dandy.set_location(name)
     if out:
-        await pause(ctx)
+        if ctx.voice_client:
+            voice = get(bot.voice_clients, guild=ctx.guild)
+            if voice.is_paused():
+                await play(ctx)
+            else:
+                await pause(ctx)
+                await play(ctx)
         await ctx.send(f"Current location set to {name}")
+        image = Dandy.get_location_image()
+        image = os.path.join(Dandy.campaign_path, image)
+        with open(image, 'rb') as f:
+            picture = File(f)
+            await ctx.send(file=picture)
     else:
         await ctx.send(f"I can't find a location named {name}")
 

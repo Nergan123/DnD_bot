@@ -1,12 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
-    <location Name="Arcona">
+    <location Name="Arcona" image='arcona.jpg'>
         <music_calm>
             <url>https://www.youtube.com/watch?v=fIY55V0Tblk</url>
             <url>https://www.youtube.com/watch?v=Da9S9yjZZP4</url>
         </music_calm>
         <music_battle>
             <url>https://www.youtube.com/watch?v=lAGm9MTyRJ8</url>
+        </music_battle>
+        <NPC>
+            tmp
+        </NPC>
+    </location>
+    <location Name="Arcona_cemetery" image='arcona_cemetery.jpg'>
+        <music_calm>
+            <url>https://www.youtube.com/watch?v=RQ-VBQPqu5Q</url>
+        </music_calm>
+        <music_battle>
+            <url>https://www.youtube.com/watch?v=CLAa1urufGE</url>
         </music_battle>
         <NPC>
             tmp

@@ -47,12 +47,20 @@ class Dandy_bot:
 
         return output
 
+    def get_url(self):
+        url = self.parser.get_music(self.location)
+
+        return url
+
     def set_location(self, name):
         if name not in self.locations_list:
             return False
         else:
             self.location = name
             return True
+
+    def get_location_image(self):
+        return self.parser.get_location_image(self.location)
 
 
 # TODO add Iriy location to xml
