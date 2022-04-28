@@ -39,13 +39,11 @@ class Dandy_bot:
             output = output + ' ' + str(roll)
             throw_list = self.dice_comments[self.dice_comments.dice == roll]
             line = throw_list.sample()
-            self.rolls.append(roll)
             output = line.iloc[0]['comment'] + '**' + f' {user} rolls ' + str(roll) + '**'
         else:
             for throw in range(number_of_dice):
                 roll = random.choice(range(1, number_of_sides+1))
                 output = output + ' ' + str(roll)
-                self.rolls.append(roll)
             output = '**' + f'{user} rolls ' + output + '**'
 
         return output
@@ -65,6 +63,9 @@ class Dandy_bot:
     def get_location_image(self):
         return self.parser.get_location_image(self.location)
 
+    def get_bestiary(self):
+        return self.bestiary
+
     def interaction(self, name):
         npc_xml = self.parser.get_npc(self.location, name)
         if npc_xml:
@@ -78,3 +79,4 @@ class Dandy_bot:
 # TODO add Iriy location to xml
 # TODO ffmpeg for linux
 # TODO add this https://www.youtube.com/watch?v=1rgDPmnAUtE to forest music
+# TODO bestiary function

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <npc>
+        <Name>Citizen</Name>
+        <Image>arcona_characters\\citizen_f.jpg</Image>
+        <Mechanics>None</Mechanics>
+        <Bestiary>She lives her own life. Worried about her own problems. Do you think she lives a happy life? Let's hope so.</Bestiary>
+    </npc>
+</root>

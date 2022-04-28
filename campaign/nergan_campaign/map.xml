@@ -8,7 +8,10 @@
         <music_battle>
             <url>https://www.youtube.com/watch?v=lAGm9MTyRJ8</url>
         </music_battle>
-        <NPC name="Arcona_guard">guard_arcona.xml</NPC>
+        <NPC name="Arcona_guard">arcona_characters\\guard_arcona.xml</NPC>
+        <NPC name="Merchant">arcona_characters\\merchant.xml</NPC>
+        <NPC name="Citizen_m">arcona_characters\\citizen_m.xml</NPC>
+        <NPC name="Citizen_f">arcona_characters\\citizen_f.xml</NPC>
     </location>
     <location Name="Arcona_cemetery" image='arcona_cemetery.jpg'>
         <music_calm>
@@ -17,6 +20,6 @@
         <music_battle>
             <url>https://www.youtube.com/watch?v=CLAa1urufGE</url>
         </music_battle>
-        <NPC name="Arcona_guard">guard_arcona.xml</NPC>
+        <NPC name="Arcona_guard">arcona_characters\\guard_arcona.xml</NPC>
     </location>
 </root>

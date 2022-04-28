@@ -171,5 +171,12 @@ async def interaction(ctx, name: str):
         await ctx.send("I can't find this npc")
 
 
+@bot.command(name='bestiary', help='Shows information about last npc you interacted with.')
+async def bestiary(ctx):
+    if Dandy.bestiary != '':
+        await ctx.send(Dandy.bestiary)
+    else:
+        await ctx.send('There were no interactions yet')
+
 if __name__ == "__main__":
     bot.run(token)
