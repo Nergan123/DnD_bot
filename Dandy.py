@@ -65,3 +65,4 @@ class Dandy_bot:
 
 # TODO add Iriy location to xml
 # TODO ffmpeg for linux
+# TODO add this https://www.youtube.com/watch?v=1rgDPmnAUtE to forest music
