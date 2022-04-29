@@ -22,6 +22,23 @@ class Dandy_bot:
         self.mechanics = ''
         self.boss = False
         self.battle = False
+        self.players = []
+
+    def add_player(self, name=''):
+        if name != '':
+            if name not in self.players:
+                self.players.append(name)
+                return True
+            else:
+                return False
+
+    def remove_player(self, name=''):
+        if name != '':
+            if name in self.players:
+                self.players.remove(name)
+                return True
+            else:
+                return False
 
     def set_campaign(self, campaign=''):
         if campaign in os.listdir('campaign'):

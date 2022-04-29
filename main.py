@@ -29,12 +29,40 @@ async def roll(ctx, message):
     await ctx.send(message_back)
 
 
-@bot.command(name='join_voice',
-             help='Commands bot to join a voice channel in which you are now. Requires a DM role')
-async def join(ctx):
+@bot.command(name='player_add', help='Adds player to the campaign list. Requires a DM role')
+async def add_player(ctx, name: str):
     role = get(ctx.guild.roles, name="DM")
     if role not in ctx.message.author.roles:
         await ctx.send("Only DM can use this command!")
+        return
+
+    out = Dandy.add_player(name)
+    if out:
+        await ctx.send(f'Added {name}')
+    else:
+        await ctx.send(f'{name} is already in the list')
+
+
+@bot.command(name='player_remove', help='Removes player from campaign. Requires a DM role')
+async def remove_player(ctx, name):
+    role = get(ctx.guild.roles, name="DM")
+    if role not in ctx.message.author.roles:
+        await ctx.send("Only DM can use this command!")
+        return
+
+    out = Dandy.remove_player(name)
+    if out:
+        await ctx.send(f'Removed {name}')
+    else:
+        await ctx.send(f"Can't find {name} in the list")
+
+
+@bot.command(name='join_voice',
+             help='Commands bot to join a voice channel in which you are now. Requires a Admin role')
+async def join(ctx):
+    role = get(ctx.guild.roles, name="Admin")
+    if role not in ctx.message.author.roles:
+        await ctx.send("Only Admin can use this command!")
         return
 
     if not ctx.message.author.voice:
