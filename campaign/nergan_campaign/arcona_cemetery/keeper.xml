@@ -2,6 +2,7 @@
 <root>
     <npc>
         <Name>Graveyard keeper</Name>
+        <Boss>0</Boss>
         <Image>arcona_cemetery\\keeper.jpg</Image>
         <Mechanics>None</Mechanics>
         <Bestiary>This old man has seen enough in his life. Now this knowledge does not allow him to sleep at night. Or is it something different why he can't sleep?</Bestiary>

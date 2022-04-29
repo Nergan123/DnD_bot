@@ -118,14 +118,17 @@ async def set_campaign(ctx, name=''):
         await ctx.send("Only DM can use this command!")
         return
 
-    if name == '':
-        await ctx.send("Name can't be blank")
-        return
-    out = Dandy.set_campaign(name)
-    if out:
-        await ctx.send(f'Campaign set to {name}')
+    if not Dandy.interaction_ongoing:
+        if name == '':
+            await ctx.send("Name can't be blank")
+            return
+        out = Dandy.set_campaign(name)
+        if out:
+            await ctx.send(f'Campaign set to {name}')
+        else:
+            await ctx.send(f'Campaign {name} not found')
     else:
-        await ctx.send(f'Campaign {name} not found')
+        await ctx.send("Can't set campaign while interaction is going.")
 
 
 @bot.command(name='set_location', help='Sets current location. DM role required.')
@@ -135,23 +138,26 @@ async def location(ctx, name=''):
         await ctx.send("Only DM can use this command!")
         return
 
-    out = Dandy.set_location(name)
-    if out:
-        if ctx.voice_client:
-            voice = get(bot.voice_clients, guild=ctx.guild)
-            if voice.is_paused():
-                await play(ctx)
-            else:
-                await pause(ctx)
-                await play(ctx)
-        await ctx.send(f"Current location set to {name}")
-        image = Dandy.get_location_image()
-        image = os.path.join(Dandy.campaign_path, image)
-        with open(image, 'rb') as f:
-            picture = File(f)
-            await ctx.send(file=picture)
+    if not Dandy.interaction_ongoing:
+        out = Dandy.set_location(name)
+        if out:
+            if ctx.voice_client:
+                voice = get(bot.voice_clients, guild=ctx.guild)
+                if voice.is_paused():
+                    await play(ctx)
+                else:
+                    await pause(ctx)
+                    await play(ctx)
+            await ctx.send(f"Current location set to {name}")
+            image = Dandy.get_location_image()
+            image = os.path.join(Dandy.campaign_path, image)
+            with open(image, 'rb') as f:
+                picture = File(f)
+                await ctx.send(file=picture)
+        else:
+            await ctx.send(f"I can't find a location named {name}")
     else:
-        await ctx.send(f"I can't find a location named {name}")
+        await ctx.send("Can't change location while interaction is going.")
 
 
 @bot.command(name='interaction', help='Starts an interaction with npc. DM role required.')
@@ -160,15 +166,34 @@ async def interaction(ctx, name: str):
     if role not in ctx.message.author.roles:
         await ctx.send("Only DM can use this command!")
         return
-
-    out = Dandy.interaction(name)
-    if out:
-        await ctx.send(f'You meet {Dandy.name_npc}')
-        with open(Dandy.image, 'rb') as f:
-            picture = File(f)
-            await ctx.send(file=picture)
+    if not Dandy.interaction_ongoing:
+        out = Dandy.interaction(name)
+        if out:
+            await ctx.send(f'You meet {Dandy.name_npc}')
+            with open(Dandy.image, 'rb') as f:
+                picture = File(f)
+                await ctx.send(file=picture)
+        else:
+            await ctx.send("I can't find this npc")
     else:
-        await ctx.send("I can't find this npc")
+        await ctx.send('You are already in the interaction')
+
+
+@bot.command(name='end_interaction', help='Ends current interaction with npc. DM role required.')
+async def end_interaction(ctx):
+    role = get(ctx.guild.roles, name="DM")
+    if role not in ctx.message.author.roles:
+        await ctx.send("Only DM can use this command!")
+        return
+
+    Dandy.end_interaction()
+    if ctx.voice_client:
+        voice = get(bot.voice_clients, guild=ctx.guild)
+        if voice.is_paused():
+            await play(ctx)
+        else:
+            await pause(ctx)
+            await play(ctx)
 
 
 @bot.command(name='bestiary', help='Shows information about last npc you interacted with.')
@@ -177,6 +202,24 @@ async def bestiary(ctx):
         await ctx.send(Dandy.bestiary)
     else:
         await ctx.send('There were no interactions yet')
+
+
+@bot.command(name='battle', help='Starts battle with current npc. DM role required.')
+async def battle(ctx):
+    role = get(ctx.guild.roles, name="DM")
+    if role not in ctx.message.author.roles:
+        await ctx.send("Only DM can use this command!")
+        return
+
+    Dandy.start_battle()
+    if ctx.voice_client:
+        voice = get(bot.voice_clients, guild=ctx.guild)
+        if voice.is_paused():
+            await play(ctx)
+        else:
+            await pause(ctx)
+            await play(ctx)
+
 
 if __name__ == "__main__":
     bot.run(token)

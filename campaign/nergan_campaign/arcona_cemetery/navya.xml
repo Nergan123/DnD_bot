@@ -2,6 +2,7 @@
 <root>
     <npc>
         <Name>Nav'ya</Name>
+        <Boss>1</Boss>
         <Image>arcona_cemetery\\navya.jpg</Image>
         <Mechanics>None</Mechanics>
         <Bestiary>A spirit of death. They bring plague and devastation wherever they go. People who were leaving home at nights became a victims of Nav'ya.</Bestiary>

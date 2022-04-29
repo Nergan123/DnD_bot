@@ -2,6 +2,7 @@
 <root>
     <npc>
         <Name>City guard</Name>
+        <Boss>0</Boss>
         <Image>arcona_characters\\arcona_guard.jpg</Image>
         <Mechanics>None</Mechanics>
         <Bestiary>Regular city guard. His duty is to guard streets of Arcona. Probably as most guards he used to be in the army. But now life has changed. Might be a marriage, might be an injury. He won't tell us.</Bestiary>

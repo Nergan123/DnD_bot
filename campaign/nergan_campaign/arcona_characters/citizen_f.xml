@@ -2,6 +2,7 @@
 <root>
     <npc>
         <Name>Citizen</Name>
+        <Boss>0</Boss>
         <Image>arcona_characters\\citizen_f.jpg</Image>
         <Mechanics>None</Mechanics>
         <Bestiary>She lives her own life. Worried about her own problems. Do you think she lives a happy life? Let's hope so.</Bestiary>

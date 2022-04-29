@@ -2,6 +2,7 @@
 <root>
     <npc>
         <Name>Merchant</Name>
+        <Boss>0</Boss>
         <Image>arcona_characters\\merchant.jpg</Image>
         <Mechanics>None</Mechanics>
         <Bestiary>Judging by his clothes and skin color he's far away from home. Probably south? He probably miss his family.</Bestiary>

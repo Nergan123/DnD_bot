@@ -2,6 +2,7 @@
 <root>
     <npc>
         <Name>Upyr'</Name>
+        <Boss>0</Boss>
         <Image>arcona_cemetery\\upyr.jpg</Image>
         <Mechanics>None</Mechanics>
         <Bestiary>Upyr' is a living dead. People believe that this creature lives in caves or graves underground. But when the night falls they come out for the hunt.</Bestiary>

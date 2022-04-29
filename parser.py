@@ -9,13 +9,18 @@ class Parser:
         self.path = os.path.join(os.getcwd(), 'campaign', self.campaign, 'map.xml')
         self.path_npc_xml = os.path.join(os.getcwd(), 'campaign', self.campaign)
 
-    def get_music(self, location=''):
+    def get_music(self, location='', battle=False):
         root_node = ET.parse(self.path).getroot()
 
         listing_url = []
+        if battle:
+            tag = 'music_battle'
+        else:
+            tag = 'music_calm'
+
         for child in root_node:
             if child.attrib['Name'] == location:
-                music_list = child.find('music_calm')
+                music_list = child.find(tag)
                 urls = music_list.findall('url')
                 for link in urls:
                     listing_url.append(link.text)
@@ -55,8 +60,13 @@ class Parser:
         root_node = ET.parse(path).getroot()
         for child in root_node:
             name = child.find('Name').text
+            boss = child.find('Boss').text
+            if boss == 0:
+                boss = False
+            else:
+                boss = True
             image = child.find('Image').text
             mechanics = child.find('Mechanics').text
             bestiary = child.find('Bestiary').text
 
-        return name, image, mechanics, bestiary
+        return name, boss, image, mechanics, bestiary
