@@ -21,6 +21,8 @@
         <music_battle>
             <url>https://www.youtube.com/watch?v=0T4QxePYjBw</url>
             <url>https://www.youtube.com/watch?v=bBXa3tZuO6M</url>
+            <url>https://www.youtube.com/watch?v=xR-LEnRjAIQ</url>
+            <url>https://www.youtube.com/watch?v=caLV1fKByuQ</url>
         </music_battle>
         <NPC name="Arcona_guard">arcona_characters\\guard_arcona.xml</NPC>
         <NPC name="Upyr">arcona_cemetery\\upyr.xml</NPC>
