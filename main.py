@@ -253,13 +253,13 @@ async def damage_sanity(ctx, name: str, val: int):
         await ctx.send(f'{name} not found')
 
 
-@tasks.loop(seconds=10)
+@tasks.loop(seconds=5)
 async def sanity_message():
     i = 0
     for player_id in Dandy.id:
         if time.time() >= Dandy.sanity_timers[i]:
             user = await bot.fetch_user(player_id)
-            await user.send("Test")
+            await user.send(Dandy.sanity_message(i))
             Dandy.update_sanity_timers(i)
         i += 1
 
