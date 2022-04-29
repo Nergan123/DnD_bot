@@ -1,7 +1,8 @@
 import os
+import time
 from config import settings
 from dotenv import load_dotenv
-from discord.ext import commands
+from discord.ext import commands, tasks
 from discord.utils import get
 from discord import FFmpegPCMAudio
 from discord import File
@@ -29,27 +30,17 @@ async def roll(ctx, message):
     await ctx.send(message_back)
 
 
-@bot.command(name='player_add', help='Adds player to the campaign list. Requires a DM role')
+@bot.command(name='login', help='Adds a player to the campaign list. Example "!login Name"')
 async def add_player(ctx, name: str):
-    role = get(ctx.guild.roles, name="DM")
-    if role not in ctx.message.author.roles:
-        await ctx.send("Only DM can use this command!")
-        return
-
-    out = Dandy.add_player(name)
+    out = Dandy.add_player(name, ctx.author.id)
     if out:
         await ctx.send(f'Added {name}')
     else:
-        await ctx.send(f'{name} is already in the list')
+        await ctx.send(f'Already logged in')
 
 
-@bot.command(name='player_remove', help='Removes player from campaign. Requires a DM role')
+@bot.command(name='logout', help='Removes a player from campaign. Example "!logout Name"')
 async def remove_player(ctx, name):
-    role = get(ctx.guild.roles, name="DM")
-    if role not in ctx.message.author.roles:
-        await ctx.send("Only DM can use this command!")
-        return
-
     out = Dandy.remove_player(name)
     if out:
         await ctx.send(f'Removed {name}')
@@ -214,6 +205,8 @@ async def end_interaction(ctx):
         await ctx.send("Only DM can use this command!")
         return
 
+    if Dandy.mechanics == 'Sanity':
+        sanity_message.stop()
     Dandy.end_interaction()
     if ctx.voice_client:
         voice = get(bot.voice_clients, guild=ctx.guild)
@@ -247,6 +240,19 @@ async def battle(ctx):
         else:
             await pause(ctx)
             await play(ctx)
+    if Dandy.mechanics == 'Sanity':
+        sanity_message.start()
+
+
+@tasks.loop(seconds=10)
+async def sanity_message():
+    i = 0
+    for player_id in Dandy.id:
+        if time.time() >= Dandy.sanity_timers[i]:
+            user = await bot.fetch_user(player_id)
+            await user.send("Test")
+            Dandy.update_sanity_timers(i)
+        i += 1
 
 
 if __name__ == "__main__":

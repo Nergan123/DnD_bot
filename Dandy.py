@@ -1,4 +1,5 @@
 import os
+import time
 import pandas as pd
 from parser import *
 
@@ -23,11 +24,17 @@ class Dandy_bot:
         self.boss = False
         self.battle = False
         self.players = []
+        self.id = []
+        self.sanity_level = []
+        self.sanity_timers = []
 
-    def add_player(self, name=''):
+    def add_player(self, name='', id=''):
+        if id in self.id:
+            return False
         if name != '':
             if name not in self.players:
                 self.players.append(name)
+                self.id.append(id)
                 return True
             else:
                 return False
@@ -35,7 +42,9 @@ class Dandy_bot:
     def remove_player(self, name=''):
         if name != '':
             if name in self.players:
+                ind = self.players.index(name)
                 self.players.remove(name)
+                self.id.pop(ind)
                 return True
             else:
                 return False
@@ -55,7 +64,6 @@ class Dandy_bot:
         output = ''
         if number_of_dice == 1 and number_of_sides == 20:
             roll = random.choice(range(1, number_of_sides+1))
-            output = output + ' ' + str(roll)
             throw_list = self.dice_comments[self.dice_comments.dice == roll]
             line = throw_list.sample()
             output = line.iloc[0]['comment'] + '**' + f' {user} rolls ' + str(roll) + '**'
@@ -104,6 +112,12 @@ class Dandy_bot:
 
     def start_battle(self):
         self.battle = True
+        if self.mechanics == 'Sanity':
+            self.sanity_level = [100 for player in self.players]
+            self.sanity_timers = [time.time() + 30 for player in self.players]
+
+    def update_sanity_timers(self, i):
+        self.sanity_timers[i] = time.time() + 30
 
 
 # TODO add Iriy location to xml
