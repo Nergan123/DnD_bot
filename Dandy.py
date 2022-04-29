@@ -114,10 +114,19 @@ class Dandy_bot:
         self.battle = True
         if self.mechanics == 'Sanity':
             self.sanity_level = [100 for player in self.players]
-            self.sanity_timers = [time.time() + 30 for player in self.players]
+            self.sanity_timers = [time.time() + 300 for player in self.players]
+
+    def damage_sanity(self, name, dmg):
+        if name in self.players:
+            ind = self.players.index(name)
+            self.sanity_level[ind] = self.sanity_level[ind] - dmg
+            self.update_sanity_timers(ind)
+            return True
+        else:
+            return False
 
     def update_sanity_timers(self, i):
-        self.sanity_timers[i] = time.time() + 30
+        self.sanity_timers[i] = time.time() + 290*(self.sanity_level[i]/100) + 10
 
 
 # TODO add Iriy location to xml

@@ -244,6 +244,15 @@ async def battle(ctx):
         sanity_message.start()
 
 
+@bot.command(name='damage_sanity')
+async def damage_sanity(ctx, name: str, val: int):
+    out = Dandy.damage_sanity(name, val)
+    if out:
+        await ctx.send(f'{name} loses {val}% sanity.')
+    else:
+        await ctx.send(f'{name} not found')
+
+
 @tasks.loop(seconds=10)
 async def sanity_message():
     i = 0
