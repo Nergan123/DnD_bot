@@ -29,6 +29,10 @@ class Dandy_bot:
         self.id = []
         self.sanity_level = []
         self.sanity_timers = []
+        self.volume = 1.0
+
+    def set_volume(self, vol: float):
+        self.volume = vol
 
     def add_player(self, name='', id=''):
         if id in self.id:

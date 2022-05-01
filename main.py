@@ -5,6 +5,7 @@ from dotenv import load_dotenv
 from discord.ext import commands, tasks
 from discord.utils import get
 from discord import FFmpegPCMAudio
+from discord import PCMVolumeTransformer
 from discord import File
 from youtube_dl import YoutubeDL
 from Dandy import Dandy_bot
@@ -107,6 +108,7 @@ async def play(ctx):
             info = ydl.extract_info(url, download=False)
         URL = info['url']
         voice.play(FFmpegPCMAudio(URL, **FFMPEG_OPTIONS))
+        voice.source = PCMVolumeTransformer(voice.source, volume=Dandy.volume)
         voice.is_playing()
 
     else:
@@ -262,6 +264,18 @@ async def sanity_message():
             await user.send(Dandy.sanity_message(i))
             Dandy.update_sanity_timers(i)
         i += 1
+
+
+@bot.command(name='volume', help='Sets volume of the bot.')
+async def volume(ctx, vol: int):
+    if ctx.voice_client:
+        voice = get(bot.voice_clients, guild=ctx.guild)
+        if 0 <= vol <= 100:
+            new_volume = vol / 100
+            voice.source.volume = new_volume
+            Dandy.set_volume(new_volume)
+        else:
+            await ctx.send('Please enter a volume between 0 and 100')
 
 
 if __name__ == "__main__":
