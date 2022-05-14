@@ -119,19 +119,6 @@ class Dandy_bot:
         if self.mechanics == 'Sanity':
             self.sanity_mec = sanity(self.players)
 
-    def damage_sanity(self, name, dmg):
-        if name in self.players:
-            ind = self.players.index(name)
-            self.sanity_mec.damage(ind, dmg)
-            return True
-        else:
-            return False
-
-    def sanity_message(self, index):
-        message = self.sanity_mec.message(index)
-        output = '**' + self.name_npc + ': ' + '**' + message
-        return output
-
 
 # TODO add Iriy location to xml
 # TODO ffmpeg for linux

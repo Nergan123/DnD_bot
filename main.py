@@ -248,8 +248,9 @@ async def battle(ctx):
 
 @bot.command(name='damage_sanity')
 async def damage_sanity(ctx, name: str, val: int):
-    out = Dandy.damage_sanity(name, val)
-    if out:
+    if name in Dandy.players:
+        ind = Dandy.players.index(name)
+        Dandy.sanity_mec.damage(ind, val)
         await ctx.send(f'{name} loses {val}% sanity.')
     else:
         await ctx.send(f'{name} not found')
@@ -261,7 +262,9 @@ async def sanity_message():
     for player_id in Dandy.id:
         if time.time() >= Dandy.sanity_mec.sanity_timers[i]:
             user = await bot.fetch_user(player_id)
-            await user.send(Dandy.sanity_message(i))
+            message = Dandy.sanity_mec.message(i)
+            output = '**' + Dandy.name_npc + ': ' + '**' + message
+            await user.send(output)
             Dandy.sanity_mec.update_timers(i)
         i += 1
 
