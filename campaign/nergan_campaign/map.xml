@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
-    <location Name="Beginning" image='beginning.jpg'>
+    <location Name="Beginning" image='beginning\\beginning.jpg'>
         <music_calm>
             <url>https://www.youtube.com/watch?v=I-cC3wSKAGk</url>
             <url>https://www.youtube.com/watch?v=cgDe80oFkWU</url>
@@ -10,6 +10,17 @@
             <url>https://www.youtube.com/watch?v=c_AyKGm9alA</url>
         </music_battle>
         <NPC name="Boar">beginning\\boar.xml</NPC>
+    </location>
+    <location Name="Swamp" image='beginning\\swamp.jpg'>
+        <music_calm>
+            <url>https://www.youtube.com/watch?v=TYnz9S0kVH4</url>
+            <url>https://www.youtube.com/watch?v=ih4_1FyVjaY</url>
+            <url>https://www.youtube.com/watch?v=vVt_lBPP3dA</url>
+        </music_calm>
+        <music_battle>
+            <url>https://www.youtube.com/watch?v=oD5jtsFEWRg</url>
+        </music_battle>
+        <NPC name="Kikimora">beginning\\kikimora.xml</NPC>
     </location>
     <location Name="Arcona" image='arcona.jpg'>
         <music_calm>
