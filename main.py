@@ -259,10 +259,10 @@ async def damage_sanity(ctx, name: str, val: int):
 async def sanity_message():
     i = 0
     for player_id in Dandy.id:
-        if time.time() >= Dandy.sanity_timers[i]:
+        if time.time() >= Dandy.sanity_mec.sanity_timers[i]:
             user = await bot.fetch_user(player_id)
             await user.send(Dandy.sanity_message(i))
-            Dandy.update_sanity_timers(i)
+            Dandy.sanity_mec.update_timers(i)
         i += 1
 
 

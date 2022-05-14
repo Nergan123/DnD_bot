@@ -3,6 +3,7 @@ import random
 import time
 import pandas as pd
 from parser import *
+from mechanics.sanity import *
 
 
 class Dandy_bot:
@@ -18,7 +19,6 @@ class Dandy_bot:
         self.locations_list = self.parser.get_all_locations()
         self.interaction_ongoing = False
         self.dice_comments = pd.read_csv('comments_data/dice_comments.csv', delimiter=';')
-        self.sanity_comments = pd.read_csv('comments_data/sanity_comments.csv', delimiter=';')
         self.name_npc = ''
         self.bestiary = ''
         self.image = ''
@@ -27,8 +27,6 @@ class Dandy_bot:
         self.battle = False
         self.players = []
         self.id = []
-        self.sanity_level = []
-        self.sanity_timers = []
         self.volume = 1.0
 
     def set_volume(self, vol: float):
@@ -119,29 +117,23 @@ class Dandy_bot:
     def start_battle(self):
         self.battle = True
         if self.mechanics == 'Sanity':
-            self.sanity_level = [100 for player in self.players]
-            self.sanity_timers = [time.time() + 180 for player in self.players]
+            self.sanity_mec = sanity(self.players)
 
     def damage_sanity(self, name, dmg):
         if name in self.players:
             ind = self.players.index(name)
-            self.sanity_level[ind] = self.sanity_level[ind] - dmg
-            self.update_sanity_timers(ind)
+            self.sanity_mec.damage(ind, dmg)
             return True
         else:
             return False
 
     def sanity_message(self, index):
-        result = round(self.sanity_level[index]/10)
-        sanity_comments_list = self.sanity_comments[self.sanity_comments.sanity == result]
-        line = sanity_comments_list.sample()
-        output = '**' + self.name_npc + ': ' + '**' + line.iloc[0]['comment']
+        message = self.sanity_mec.message(index)
+        output = '**' + self.name_npc + ': ' + '**' + message
         return output
-
-    def update_sanity_timers(self, i):
-        self.sanity_timers[i] = time.time() + 175*(self.sanity_level[i]/100) + 5 + random.randint(1, 5)
 
 
 # TODO add Iriy location to xml
 # TODO ffmpeg for linux
 # TODO add this https://www.youtube.com/watch?v=1rgDPmnAUtE to forest music, this https://www.youtube.com/watch?v=bsvzP8EO65w to Koshey
+# TODO add this for ending song https://www.youtube.com/watch?v=6FJXjJeOU6Q
