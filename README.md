@@ -10,5 +10,5 @@ Application Utilizes docker functionality:
 docker build --tag dnd .
 ```
 ```
-docker run -it dnd
+docker run -e "Token=YOUR_TOKEN_HERE" -it dnd
 ```
