@@ -17,6 +17,6 @@ RUN pip install -r requirements.txt
 RUN apt update
 RUN apt-get install -y ffmpeg
 
-COPY .. .
+COPY . .
 
 CMD ["python","main.py"]
