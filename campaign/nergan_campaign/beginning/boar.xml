@@ -3,7 +3,7 @@
     <npc>
         <Name>Boar</Name>
         <Boss>0</Boss>
-        <Image>beginning\\boar.jpg</Image>
+        <Image>beginning/boar.jpg</Image>
         <Mechanics>None</Mechanics>
         <Bestiary>It's a simple wild boar. Wild animal living in forests or fields near Arcona.</Bestiary>
     </npc>

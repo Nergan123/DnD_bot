@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
-    <location Name="Beginning" image='beginning\\beginning.jpg'>
+    <location Name="Beginning" image='beginning/beginning.jpg'>
         <music_calm>
             <url>https://www.youtube.com/watch?v=I-cC3wSKAGk</url>
             <url>https://www.youtube.com/watch?v=cgDe80oFkWU</url>
@@ -9,9 +9,9 @@
         <music_battle>
             <url>https://www.youtube.com/watch?v=c_AyKGm9alA</url>
         </music_battle>
-        <NPC name="Boar">beginning\\boar.xml</NPC>
+        <NPC name="Boar">beginning/boar.xml</NPC>
     </location>
-    <location Name="Swamp" image='beginning\\swamp.jpg'>
+    <location Name="Swamp" image='beginning/swamp.jpg'>
         <music_calm>
             <url>https://www.youtube.com/watch?v=TYnz9S0kVH4</url>
             <url>https://www.youtube.com/watch?v=ih4_1FyVjaY</url>
@@ -20,7 +20,7 @@
         <music_battle>
             <url>https://www.youtube.com/watch?v=oD5jtsFEWRg</url>
         </music_battle>
-        <NPC name="Kikimora">beginning\\kikimora.xml</NPC>
+        <NPC name="Kikimora">beginning/kikimora.xml</NPC>
     </location>
     <location Name="Arcona" image='arcona.jpg'>
         <music_calm>
@@ -30,10 +30,10 @@
         <music_battle>
             <url>https://www.youtube.com/watch?v=lAGm9MTyRJ8</url>
         </music_battle>
-        <NPC name="Arcona_guard">arcona_characters\\guard_arcona.xml</NPC>
-        <NPC name="Merchant">arcona_characters\\merchant.xml</NPC>
-        <NPC name="Citizen_m">arcona_characters\\citizen_m.xml</NPC>
-        <NPC name="Citizen_f">arcona_characters\\citizen_f.xml</NPC>
+        <NPC name="Arcona_guard">arcona_characters/guard_arcona.xml</NPC>
+        <NPC name="Merchant">arcona_characters/merchant.xml</NPC>
+        <NPC name="Citizen_m">arcona_characters/citizen_m.xml</NPC>
+        <NPC name="Citizen_f">arcona_characters/citizen_f.xml</NPC>
     </location>
     <location Name="Arcona_ruins" image='arcona_ruins.jpg'>
         <music_calm>
@@ -46,10 +46,10 @@
             <url>https://www.youtube.com/watch?v=xR-LEnRjAIQ</url>
             <url>https://www.youtube.com/watch?v=caLV1fKByuQ</url>
         </music_battle>
-        <NPC name="Arcona_guard">arcona_characters\\guard_arcona.xml</NPC>
-        <NPC name="Upyr">arcona_ruins\\upyr.xml</NPC>
-        <NPC name="Zlyden">arcona_ruins\\zlyden.xml</NPC>
-        <NPC name="Navya">arcona_ruins\\navya.xml</NPC>
-        <NPC name="Keeper">arcona_ruins\\keeper.xml</NPC>
+        <NPC name="Arcona_guard">arcona_characters/guard_arcona.xml</NPC>
+        <NPC name="Upyr">arcona_ruins/upyr.xml</NPC>
+        <NPC name="Zlyden">arcona_ruins/zlyden.xml</NPC>
+        <NPC name="Navya">arcona_ruins/navya.xml</NPC>
+        <NPC name="Keeper">arcona_ruins/keeper.xml</NPC>
     </location>
 </root>

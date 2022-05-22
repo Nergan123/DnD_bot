@@ -98,9 +98,14 @@ async def play(ctx):
         await ctx.send("I'm not in a voice client")
 
     YDL_OPTIONS = {'format': 'bestaudio', 'noplaylist': 'True'}
-    FFMPEG_OPTIONS = {
-        'before_options': '-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5',
-        'options': '-vn', 'executable': 'ffmpeg_util\\win\\ffmpeg.exe'}
+    if Dandy.platform == 'windows':
+        FFMPEG_OPTIONS = {
+            'before_options': '-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5',
+            'options': '-vn', 'executable': 'ffmpeg_util\\win\\ffmpeg.exe'}
+    else:
+        FFMPEG_OPTIONS = {
+            'before_options': '-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5',
+            'options': '-vn'}
     voice = get(bot.voice_clients, guild=ctx.guild)
     url = Dandy.get_url()
     if not voice.is_playing():

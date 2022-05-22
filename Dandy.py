@@ -1,6 +1,7 @@
 import os
 import random
 import time
+import sys
 import pandas as pd
 from parser import *
 from mechanics.sanity import *
@@ -12,7 +13,10 @@ class Dandy_bot:
             self.campaign = 'nergan_campaign'
         else:
             self.campaign = campaign
-
+        if sys.platform == 'linux':
+            self.platform = 'linux'
+        else:
+            self.platform = 'windows'
         self.parser = Parser(self.campaign)
         self.campaign_path = os.path.join(os.getcwd(), 'campaign', self.campaign)
         self.location = ''
