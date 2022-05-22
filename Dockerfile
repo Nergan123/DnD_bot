@@ -1,13 +1,3 @@
-# # First stage
-# FROM python:3.10 AS builder
-# ENV Token
-#
-# WORKDIR /app
-# RUN touch .env
-# RUN echo "Token=$Token" > .env
-
-
-# Final stage
 FROM python:3.10
 ENV Token=
 WORKDIR /app
