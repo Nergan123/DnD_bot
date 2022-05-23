@@ -68,18 +68,24 @@ class Dandy_bot:
         else:
             return False
 
-    def roll(self, number_of_dice, number_of_sides, user=''):
+    def roll(self, number_of_dice, number_of_sides, user='', dm=False):
         output = ''
         if number_of_dice == 1 and number_of_sides == 20:
             roll = random.choice(range(1, number_of_sides+1))
             throw_list = self.dice_comments[self.dice_comments.dice == roll]
             line = throw_list.sample()
-            output = line.iloc[0]['comment'] + '**' + f' {user} rolls ' + str(roll) + '**'
+            if dm and self.battle:
+                output = line.iloc[0]['comment'] + '**' + f' {self.name_npc} rolls ' + str(roll) + '**'
+            else:
+                output = line.iloc[0]['comment'] + '**' + f' {user} rolls ' + str(roll) + '**'
         else:
             for throw in range(number_of_dice):
                 roll = random.choice(range(1, number_of_sides+1))
                 output = output + ' ' + str(roll)
-            output = '**' + f'{user} rolls ' + output + '**'
+            if dm and self.battle:
+                output = '**' + f'{self.name_npc} rolls ' + output + '**'
+            else:
+                output = '**' + f'{user} rolls ' + output + '**'
 
         return output
 

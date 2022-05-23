@@ -25,9 +25,14 @@ async def on_ready():
 @bot.command(name='dice',
              help='Rolls the dice. Command example "!dice 2d6"')
 async def roll(ctx, message):
+    role = get(ctx.guild.roles, name="DM")
+    if role in ctx.message.author.roles:
+        dm = True
+    else:
+        dm = False
     message = message.split('d')
     author = ctx.message.author.display_name
-    message_back = Dandy.roll(int(message[0]), int(message[1]), author)
+    message_back = Dandy.roll(int(message[0]), int(message[1]), author, dm)
     await ctx.send(message_back)
 
 
@@ -186,6 +191,15 @@ async def location(ctx, name=''):
         await ctx.send("Can't change location while interaction is going.")
 
 
+@bot.command(name='location_photo', help='Sends a photo of a current location.')
+async def photo_location(ctx):
+    image = Dandy.get_location_image()
+    image = os.path.join(Dandy.campaign_path, image)
+    with open(image, 'rb') as f:
+        picture = File(f)
+        await ctx.send(file=picture)
+
+
 @bot.command(name='interaction', help='Starts an interaction with npc. DM role required.')
 async def interaction(ctx, name: str):
     role = get(ctx.guild.roles, name="DM")
@@ -203,6 +217,15 @@ async def interaction(ctx, name: str):
             await ctx.send("I can't find this npc")
     else:
         await ctx.send('You are already in the interaction')
+
+
+@bot.command(name='npc_photo', help='Sends a photo of a current npc.')
+async def photo_npc(ctx):
+    image = Dandy.image
+    image = os.path.join(Dandy.campaign_path, image)
+    with open(image, 'rb') as f:
+        picture = File(f)
+        await ctx.send(file=picture)
 
 
 @bot.command(name='end_interaction', help='Ends current interaction with npc. DM role required.')
@@ -253,12 +276,53 @@ async def battle(ctx):
 
 @bot.command(name='damage_sanity')
 async def damage_sanity(ctx, name: str, val: int):
-    if name in Dandy.players:
-        ind = Dandy.players.index(name)
-        Dandy.sanity_mec.damage(ind, val)
-        await ctx.send(f'{name} loses {val}% sanity.')
+    role = get(ctx.guild.roles, name="DM")
+    if role not in ctx.message.author.roles:
+        await ctx.send("Only DM can use this command!")
+        return
+    if Dandy.mechanics == 'Sanity':
+        if name in Dandy.players:
+            ind = Dandy.players.index(name)
+            Dandy.sanity_mec.damage(ind, val)
+            await ctx.send(f'{name} loses {val}% sanity.')
+        else:
+            await ctx.send(f'{name} not found')
     else:
-        await ctx.send(f'{name} not found')
+        await ctx.send("Can't do that right now.")
+        return
+
+
+@bot.command(name='heal_sanity')
+async def heal_sanity(ctx, name: str, val: int):
+    role = get(ctx.guild.roles, name="DM")
+    if role not in ctx.message.author.roles:
+        await ctx.send("Only DM can use this command!")
+        return
+    if Dandy.mechanics == 'Sanity':
+        if name in Dandy.players:
+            ind = Dandy.players.index(name)
+            Dandy.sanity_mec.heal(ind, val)
+            await ctx.send(f'{name} gains {val}% sanity.')
+        else:
+            await ctx.send(f'{name} not found')
+    else:
+        await ctx.send("Can't do that right now.")
+        return
+
+
+@bot.command(name='get_sanity')
+async def get_sanity_list(ctx):
+    role = get(ctx.guild.roles, name="DM")
+    if role not in ctx.message.author.roles:
+        await ctx.send("Only DM can use this command!")
+        return
+    if Dandy.mechanics == 'Sanity':
+        message = Dandy.sanity_mec.get_sanity()
+        await ctx.send(message)
+        return
+    else:
+        await ctx.send("Can't do that right now.")
+        return
 
 
 @tasks.loop(seconds=5)

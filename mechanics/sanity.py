@@ -14,6 +14,10 @@ class sanity:
         self.sanity_level[ind] = self.sanity_level[ind] - dmg
         self.update_timers(ind)
 
+    def heal(self, ind, val):
+        self.sanity_level[ind] = self.sanity_level[ind] + val
+        self.update_timers(ind)
+
     def update_timers(self, i):
         self.sanity_timers[i] = time.time() + 175*(self.sanity_level[i]/100) + 5 + random.randint(1, 5)
 
@@ -24,3 +28,9 @@ class sanity:
         output = line.iloc[0]['comment']
         return output
 
+    def get_sanity(self):
+        output = ''
+        for i, player in enumerate(self.players):
+            output = output + player + "'s sanity level" + ': ' + str(self.sanity_level[i]) + '%\n'
+
+        return output
