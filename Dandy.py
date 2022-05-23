@@ -95,6 +95,7 @@ class Dandy_bot:
         return url
 
     def set_location(self, name):
+        self.locations_list = self.parser.get_all_locations()
         if name not in self.locations_list:
             return False
         else:
