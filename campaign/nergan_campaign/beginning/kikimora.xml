@@ -2,9 +2,9 @@
 <root>
     <npc>
         <Name>Kikimora</Name>
-        <Boss>0</Boss>
+        <Boss>1</Boss>
         <Image>beginning/kikimora.jpg</Image>
-        <Mechanics>None</Mechanics>
+        <Mechanics>Nightmare</Mechanics>
         <Bestiary>Demon of nightmares. Kikimora is a creature who lives in a swamp. It is believed that person who dies with unnatural death turns into kikimora.</Bestiary>
     </npc>
 </root>

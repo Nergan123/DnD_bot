@@ -5,6 +5,7 @@ import sys
 import pandas as pd
 from parser import *
 from mechanics.sanity import *
+from mechanics.nightmare import *
 
 
 class Dandy_bot:
@@ -125,10 +126,12 @@ class Dandy_bot:
         self.bestiary = ''
         self.battle = False
 
-    def start_battle(self):
+    def start_battle(self, channel_id):
         self.battle = True
         if self.mechanics == 'Sanity':
             self.sanity_mec = sanity(self.players)
+        elif self.mechanics == 'Nightmare':
+            self.nightmare_mec = nightmare(self.players, channel_id)
 
 
 # TODO add Iriy location to xml

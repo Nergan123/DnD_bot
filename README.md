@@ -10,3 +10,4 @@ docker build --tag dnd .
 ```
 docker run -e "Token=YOUR_TOKEN_HERE" -it dnd
 ```
+Arts do not belong to me.

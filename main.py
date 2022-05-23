@@ -1,5 +1,6 @@
 import os
 import time
+import random
 from config import settings
 from dotenv import load_dotenv
 from discord.ext import commands, tasks
@@ -235,8 +236,8 @@ async def end_interaction(ctx):
         await ctx.send("Only DM can use this command!")
         return
 
-    if Dandy.mechanics == 'Sanity':
-        sanity_message.stop()
+    if Dandy.mechanics != '':
+        mechanics_message.stop()
     Dandy.end_interaction()
     if ctx.voice_client:
         voice = get(bot.voice_clients, guild=ctx.guild)
@@ -262,7 +263,8 @@ async def battle(ctx):
         await ctx.send("Only DM can use this command!")
         return
 
-    Dandy.start_battle()
+    channel_id = ctx.channel.id
+    Dandy.start_battle(channel_id)
     if ctx.voice_client:
         voice = get(bot.voice_clients, guild=ctx.guild)
         if voice.is_paused():
@@ -270,8 +272,8 @@ async def battle(ctx):
         else:
             await pause(ctx)
             await play(ctx)
-    if Dandy.mechanics == 'Sanity':
-        sanity_message.start()
+    if Dandy.mechanics != '':
+        mechanics_message.start(ctx)
 
 
 @bot.command(name='damage_sanity')
@@ -326,16 +328,69 @@ async def get_sanity_list(ctx):
 
 
 @tasks.loop(seconds=5)
-async def sanity_message():
-    i = 0
-    for player_id in Dandy.id:
-        if time.time() >= Dandy.sanity_mec.sanity_timers[i]:
-            user = await bot.fetch_user(player_id)
-            message = Dandy.sanity_mec.message(i)
-            output = '**' + Dandy.name_npc + ': ' + '**' + message
-            await user.send(output)
-            Dandy.sanity_mec.update_timers(i)
-        i += 1
+async def mechanics_message(ctx):
+    if Dandy.mechanics == 'Sanity':
+        i = 0
+        for player_id in Dandy.id:
+            if time.time() >= Dandy.sanity_mec.sanity_timers[i]:
+                user = await bot.fetch_user(player_id)
+                message = Dandy.sanity_mec.message(i)
+                output = '**' + Dandy.name_npc + ': ' + '**' + message
+                await user.send(output)
+                Dandy.sanity_mec.update_timers(i)
+            i += 1
+    elif Dandy.mechanics == 'Nightmare':
+        if ctx.voice_client:
+            voice = get(bot.voice_clients, guild=ctx.guild)
+            if not voice.is_playing():
+                await play(ctx)
+
+        if random.randint(0, 100) < 2:
+            if random.randint(1, 2) == 1:
+                if ctx.voice_client:
+                    voice = get(bot.voice_clients, guild=ctx.guild)
+                    if voice.is_paused():
+                        await play_nightmare(ctx)
+                    else:
+                        await pause(ctx)
+                        await play_nightmare(ctx)
+            else:
+                image = Dandy.nightmare_mec.get_image()
+                image = os.path.join('comments_data', 'nightmare_pics', image)
+                timer = float(random.randint(1, 5))
+                with open(image, 'rb') as f:
+                    picture = File(f)
+                    await ctx.send(file=picture, delete_after=timer)
+
+
+@bot.command(pass_context=True)
+async def play_nightmare(ctx):
+    role = get(ctx.guild.roles, name="DM")
+    if role not in ctx.message.author.roles:
+        await ctx.send("Only DM can use this command!")
+        return
+
+    if not ctx.voice_client:
+        await ctx.send("I'm not in a voice client")
+
+    YDL_OPTIONS = {'format': 'bestaudio', 'noplaylist': 'True'}
+    if Dandy.platform == 'windows':
+        FFMPEG_OPTIONS = {
+            'before_options': '-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5',
+            'options': '-vn', 'executable': 'ffmpeg_util\\win\\ffmpeg.exe'}
+    else:
+        FFMPEG_OPTIONS = {
+            'before_options': '-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5',
+            'options': '-vn'}
+    voice = get(bot.voice_clients, guild=ctx.guild)
+    url = Dandy.nightmare_mec.get_url()
+    if not voice.is_playing():
+        with YoutubeDL(YDL_OPTIONS) as ydl:
+            info = ydl.extract_info(url, download=False)
+        URL = info['url']
+        voice.play(FFmpegPCMAudio(URL, **FFMPEG_OPTIONS))
+        voice.source = PCMVolumeTransformer(voice.source, volume=Dandy.volume)
+        voice.is_playing()
 
 
 @bot.command(name='volume', help='Sets volume of the bot.')
