@@ -263,8 +263,7 @@ async def battle(ctx):
         await ctx.send("Only DM can use this command!")
         return
 
-    channel_id = ctx.channel.id
-    Dandy.start_battle(channel_id)
+    Dandy.start_battle()
     if ctx.voice_client:
         voice = get(bot.voice_clients, guild=ctx.guild)
         if voice.is_paused():
@@ -355,7 +354,7 @@ async def mechanics_message(ctx):
             if not voice.is_playing():
                 await play(ctx)
 
-        if random.randint(0, 100) < 2:
+        if random.randint(0, 100) < 5:
             if random.randint(1, 2) == 1:
                 if ctx.voice_client:
                     voice = get(bot.voice_clients, guild=ctx.guild)

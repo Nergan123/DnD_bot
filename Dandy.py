@@ -126,12 +126,12 @@ class Dandy_bot:
         self.bestiary = ''
         self.battle = False
 
-    def start_battle(self, channel_id):
+    def start_battle(self):
         self.battle = True
         if self.mechanics == 'Sanity':
             self.sanity_mec = sanity(self.players)
         elif self.mechanics == 'Nightmare':
-            self.nightmare_mec = nightmare(self.players, channel_id)
+            self.nightmare_mec = nightmare()
 
 
 # TODO add Iriy location to xml
