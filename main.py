@@ -312,6 +312,16 @@ async def heal_sanity(ctx, name: str, val: int):
         return
 
 
+@bot.command(name='stop_mechanics', help='Stops current mechanic.')
+async def mechanics_stop(ctx):
+    role = get(ctx.guild.roles, name="DM")
+    if role not in ctx.message.author.roles:
+        await ctx.send("Only DM can use this command!")
+        return
+
+    mechanics_message.stop()
+
+
 @bot.command(name='get_sanity')
 async def get_sanity_list(ctx):
     role = get(ctx.guild.roles, name="DM")
