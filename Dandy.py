@@ -34,6 +34,11 @@ class Dandy_bot:
         self.id = []
         self.volume = 1.0
 
+# TODO add AWS S3
+
+    def dump_self(self):
+        return json.dumps(self)
+
     def set_volume(self, vol: float):
         self.volume = vol
 
