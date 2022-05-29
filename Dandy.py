@@ -19,6 +19,7 @@ class Dandy_bot:
         else:
             self.platform = 'windows'
         self.parser = Parser(self.campaign)
+        self.guild = ''
         self.campaign_path = os.path.join(os.getcwd(), 'campaign', self.campaign)
         self.location = ''
         self.locations_list = self.parser.get_all_locations()
@@ -34,13 +35,14 @@ class Dandy_bot:
         self.id = []
         self.volume = 1.0
 
-# TODO add AWS S3
+# TODO Fix sanity load and save system
 
     def dump_self(self):
         return json.dumps(self)
 
     def set_volume(self, vol: float):
         self.volume = vol
+        self.save_state()
 
     def add_player(self, name='', id=''):
         if id in self.id:
@@ -59,6 +61,7 @@ class Dandy_bot:
                 ind = self.players.index(name)
                 self.players.remove(name)
                 self.id.pop(ind)
+                self.save_state()
                 return True
             else:
                 return False
@@ -70,6 +73,7 @@ class Dandy_bot:
             self.campaign_path = os.path.join(os.getcwd(), 'campaign', self.campaign)
             self.location = ''
             self.locations_list = self.parser.get_all_locations()
+            self.save_state()
             return True
         else:
             return False
@@ -106,6 +110,7 @@ class Dandy_bot:
             return False
         else:
             self.location = name
+            self.save_state()
             return True
 
     def get_location_image(self):
@@ -117,8 +122,10 @@ class Dandy_bot:
     def interaction(self, name):
         npc_xml = self.parser.get_npc(self.location, name)
         if npc_xml:
+            self.interaction_ongoing = True
             self.name_npc, self.boss, self.image, self.mechanics, self.bestiary = self.parser.get_npc_info(npc_xml)
             self.image = os.path.join(self.campaign_path, self.image)
+            self.save_state()
             return True
         else:
             return False
@@ -130,9 +137,12 @@ class Dandy_bot:
         self.mechanics = ''
         self.bestiary = ''
         self.battle = False
+        self.interaction_ongoing = False
+        self.save_state()
 
     def start_battle(self):
         self.battle = True
+        self.save_state()
         if self.mechanics == 'Sanity':
             self.sanity_mec = sanity(self.players)
         elif self.mechanics == 'Nightmare':
