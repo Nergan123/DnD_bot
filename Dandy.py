@@ -1,14 +1,35 @@
+import json
 import os
 import random
 import time
 import sys
 import pandas as pd
+import boto3
 from parser import *
 from mechanics.sanity import *
 from mechanics.nightmare import *
 
 
 class Dandy_bot:
+    SERIALIZABLE_FIELDS = [
+        'location',
+        'interaction_ongoing',
+        'name_npc',
+        'bestiary',
+        'image',
+        'mechanics',
+        'boss',
+        'battle',
+        'players',
+        'id',
+        'volume',
+        'guild',
+        'channel',
+        'voice_channel'
+    ]
+    STATE_BUCKET = "nergan-bot"
+    STATE_REMOTE_FILE_NAME = "state.json"
+
     def __init__(self, campaign=''):
         if campaign == '':
             self.campaign = 'nergan_campaign'
@@ -34,11 +55,39 @@ class Dandy_bot:
         self.players = []
         self.id = []
         self.volume = 1.0
+        self.playing = False
+        self.channel = ''
+        self.voice_channel = ''
+        self.load_state()
+        if self.battle:
+            if self.mechanics == 'Sanity':
+                self.sanity_mec = sanity(self.players)
+                self.sanity_mec.load_state()
+            elif self.mechanics == 'Nightmare':
+                self.nightmare_mec = nightmare()
+
+        # AWS_ACCESS_KEY_ID
+        # AWS_SECRET_ACCESS_KEY
 
 # TODO Fix sanity load and save system
 
-    def dump_self(self):
-        return json.dumps(self)
+    def save_state(self):
+        state = {}
+        for property_name in self.SERIALIZABLE_FIELDS:
+            state[property_name] = self.__getattribute__(property_name)
+
+        s3 = boto3.resource('s3')
+        remote_object = s3.Object(self.STATE_BUCKET, self.STATE_REMOTE_FILE_NAME)
+        remote_object.put(Body=(bytes(json.dumps(state).encode('UTF-8'))))
+
+    def load_state(self):
+        s3 = boto3.client('s3')
+        s3_response = s3.get_object(Bucket=self.STATE_BUCKET, Key=self.STATE_REMOTE_FILE_NAME)
+        state_json = s3_response['Body'].read()
+        state = json.loads(state_json)
+        print(state)
+        for property_name in self.SERIALIZABLE_FIELDS:
+            self.__setattr__(property_name, state[property_name])
 
     def set_volume(self, vol: float):
         self.volume = vol
@@ -51,6 +100,7 @@ class Dandy_bot:
             if name not in self.players:
                 self.players.append(name)
                 self.id.append(id)
+                self.save_state()
                 return True
             else:
                 return False
