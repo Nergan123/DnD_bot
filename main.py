@@ -408,7 +408,7 @@ async def mechanics_message():
             i += 1
 
     elif Dandy.mechanics == 'Nightmare':
-        if random.randint(0, 100) < 50:
+        if random.randint(0, 100) < 5:
             if random.randint(1, 2) == 1:
                 voice = get(bot.voice_clients, guild=guild)
                 if voice.is_paused():
