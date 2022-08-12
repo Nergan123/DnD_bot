@@ -28,7 +28,7 @@ class sanity:
         self.update_timers(ind)
 
     def update_timers(self, i):
-        self.sanity_timers[i] = time.time() + 480*(self.sanity_level[i]/100) + 120 + random.randint(1, 5)
+        self.sanity_timers[i] = time.time() + 120*(self.sanity_level[i]/100) + 60 + random.randint(1, 5)
         self.save_state()
 
     def message(self, index):
@@ -50,15 +50,18 @@ class sanity:
         for property_name in self.SERIALIZABLE_FIELDS:
             state[property_name] = self.__getattribute__(property_name)
 
-        s3 = boto3.resource('s3')
-        remote_object = s3.Object(self.STATE_BUCKET, self.STATE_REMOTE_FILE_NAME)
-        remote_object.put(Body=(bytes(json.dumps(state).encode('UTF-8'))))
+        # s3 = boto3.resource('s3')
+        # remote_object = s3.Object(self.STATE_BUCKET, self.STATE_REMOTE_FILE_NAME)
+        # remote_object.put(Body=(bytes(json.dumps(state).encode('UTF-8'))))
+        with open('sanity_data.json', 'w') as f:
+            json.dump(state, f)
 
     def load_state(self):
-        s3 = boto3.client('s3')
-        s3_response = s3.get_object(Bucket=self.STATE_BUCKET, Key=self.STATE_REMOTE_FILE_NAME)
-        state_json = s3_response['Body'].read()
-        state = json.loads(state_json)
+        # s3 = boto3.client('s3')
+        # s3_response = s3.get_object(Bucket=self.STATE_BUCKET, Key=self.STATE_REMOTE_FILE_NAME)
+        # state_json = s3_response['Body'].read()
+        with open('sanity_data.json', 'w') as f:
+            state = json.loads(f.read())
         print(state)
         for property_name in self.SERIALIZABLE_FIELDS:
             self.__setattr__(property_name, state[property_name])

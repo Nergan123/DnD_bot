@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <npc>
+        <Name>Grand wizard</Name>
+        <Boss>0</Boss>
+        <Image>arcona_tower/grand_wizard.jpg</Image>
+        <Mechanics>None</Mechanics>
+        <Bestiary>He is the oldest person in the council. Only the gods themselves know what mysteries he has seen.</Bestiary>
+    </npc>
+</root>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <npc>
+        <Name>Grand warlock</Name>
+        <Boss>0</Boss>
+        <Image>arcona_tower/grand_warlock.jpg</Image>
+        <Mechanics>None</Mechanics>
+        <Bestiary>She is the first woman in the council in all history of it. That means something...</Bestiary>
+    </npc>
+</root>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <npc>
+        <Name>Grand cleric</Name>
+        <Boss>0</Boss>
+        <Image>arcona_tower/grand_cleric.jpg</Image>
+        <Mechanics>None</Mechanics>
+        <Bestiary>Decades of experience, trainings and servings to his deity.</Bestiary>
+    </npc>
+</root>

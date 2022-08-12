@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <npc>
+        <Name>Grand druid</Name>
+        <Boss>0</Boss>
+        <Image>arcona_tower/grand_druid.jpg</Image>
+        <Mechanics>None</Mechanics>
+        <Bestiary>It is nearly impossible to see druids in towns. Yet he is here...</Bestiary>
+    </npc>
+</root>

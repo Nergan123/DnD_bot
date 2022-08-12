@@ -4,7 +4,7 @@
         <music_calm>
             <url>https://www.youtube.com/watch?v=I-cC3wSKAGk</url>
             <url>https://www.youtube.com/watch?v=cgDe80oFkWU</url>
-            <url>https://www.youtube.com/watch?v=gMkXM79rfwI</url>
+            <url>https://www.youtube.com/watch?v=MW4fASDkQXA</url>
         </music_calm>
         <music_battle>
             <url>https://www.youtube.com/watch?v=c_AyKGm9alA</url>
@@ -51,5 +51,19 @@
         <NPC name="Zlyden">arcona_ruins/zlyden.xml</NPC>
         <NPC name="Navya">arcona_ruins/navya.xml</NPC>
         <NPC name="Keeper">arcona_ruins/keeper.xml</NPC>
+    </location>
+    <location Name="Arcona_tower" image='arcona_tower/tower.jpg'>
+        <music_calm>
+            <url>https://www.youtube.com/watch?v=exI1X6cfh6A</url>
+            <url>https://www.youtube.com/watch?v=MvtWljsraTs</url>
+        </music_calm>
+        <music_battle>
+            <url>https://www.youtube.com/watch?v=fR8NtDWyevw</url>
+        </music_battle>
+        <NPC name="Arcona_guard">arcona_characters/guard_arcona.xml</NPC>
+        <NPC name="Grand_cleric">arcona_tower/grand_cleric.xml</NPC>
+        <NPC name="Grand_wizard">arcona_tower/grand_wizard.xml</NPC>
+        <NPC name="Grand_warlock">arcona_tower/grand_warlock.xml</NPC>
+        <NPC name="Grand_druid">arcona_tower/grand_druid.xml</NPC>
     </location>
 </root>
