@@ -16,7 +16,7 @@ class sanity:
     def __init__(self, players):
         self.players = players
         self.sanity_level = [100 for player in self.players]
-        self.sanity_timers = [time.time() + 600 for player in self.players]
+        self.sanity_timers = [time.time() + 180 for player in self.players]
         self.sanity_comments = pd.read_csv('comments_data/sanity_comments.csv', delimiter=';')
 
     def damage(self, ind, dmg):

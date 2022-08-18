@@ -51,6 +51,7 @@
         <NPC name="Zlyden">arcona_ruins/zlyden.xml</NPC>
         <NPC name="Navya">arcona_ruins/navya.xml</NPC>
         <NPC name="Keeper">arcona_ruins/keeper.xml</NPC>
+        <NPC name="Arcona_guard">arcona_ruins/koshei.xml</NPC>
     </location>
     <location Name="Arcona_tower" image='arcona_tower/tower.jpg'>
         <music_calm>

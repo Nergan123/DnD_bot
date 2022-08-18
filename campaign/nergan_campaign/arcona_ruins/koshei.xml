@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <npc>
+        <Name>Koshei</Name>
+        <Boss>0</Boss>
+        <Image>arcona_ruins/koshei.jpg</Image>
+        <Mechanics>None</Mechanics>
+        <Bestiary>Koshei the deathless. His greed knows no limits. Centuries of practice in magic, gaining knowledge and followers</Bestiary>
+    </npc>
+</root>
