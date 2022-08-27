@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
     <npc>
-        <Name>Graveyard keeper</Name>
+        <Name>Cleric</Name>
         <Boss>0</Boss>
         <Image>arcona_ruins/keeper.jpg</Image>
         <Mechanics>None</Mechanics>
