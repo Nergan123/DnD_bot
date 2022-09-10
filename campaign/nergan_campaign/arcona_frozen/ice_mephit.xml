@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <npc>
+        <Name>Ice mephit</Name>
+        <Boss>0</Boss>
+        <Image>arcona_frozen/ice_mephit.jpg</Image>
+        <Mechanics>None</Mechanics>
+        <Bestiary>Summoned from the deepest parts of the frost realm.</Bestiary>
+    </npc>
+</root>

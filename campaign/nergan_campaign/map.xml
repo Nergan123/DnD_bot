@@ -67,4 +67,23 @@
         <NPC name="Grand_warlock">arcona_tower/grand_warlock.xml</NPC>
         <NPC name="Grand_druid">arcona_tower/grand_druid.xml</NPC>
     </location>
+    <location Name="Arcona_ice" image='arcona_frozen/ice_arcona.jpg'>
+        <music_calm>
+            <url>https://www.youtube.com/watch?v=RhvyGiJs120</url>
+            <url>https://www.youtube.com/watch?v=pi8HmR1MEOQ</url>
+            <url>https://www.youtube.com/watch?v=569cwo9GX-w</url>
+            <url>https://www.youtube.com/watch?v=SIkNWR6Y-CY</url>
+        </music_calm>
+        <music_battle>
+            <url>https://www.youtube.com/watch?v=nNBIL0LGUDU</url>
+            <url>https://www.youtube.com/watch?v=8_1F3uVSZDE</url>
+            <url>https://www.youtube.com/watch?v=0ogNiidt6QA</url>
+            <url>https://www.youtube.com/watch?v=Hhq-WxifYt0</url>
+        </music_battle>
+        <NPC name="Upyr">arcona_ruins/upyr.xml</NPC>
+        <NPC name="Zlyden">arcona_ruins/zlyden.xml</NPC>
+        <NPC name="Navya">arcona_ruins/navya.xml</NPC>
+        <NPC name="Koshei">arcona_ruins/koshei.xml</NPC>
+        <NPC name="Ice_mephit">arcona_frozen/ice_mephit.xml</NPC>
+    </location>
 </root>
