@@ -9,12 +9,12 @@ None of the arts belong to me.
 
 ## Table of Contents
 
-1. [Setting up](##Setting up)
-2. [Abilities](##Abilities)
-3. [Custom mechanics support](##Custom mechanics support)
-4. [Additional info](##Additional info)
+1. [Setting up](#settup)
+2. [Abilities](#abilities)
+3. [Custom mechanics support](#custom)
+4. [Additional info](#info)
 
-## Setting up
+## Setting up <a name="settup"></a>
 
 Before Dandy can be used he needs to be added to your
 Discord server. Instructions for this can be found
@@ -65,7 +65,7 @@ python main.py
 
 Press *ctrl+C* to stop execution.
 
-## Abilities:
+## Abilities: <a name="abilities"></a>
 
 |command | description| example|
 |:------:|:----------:|:------:|
@@ -87,7 +87,7 @@ Press *ctrl+C* to stop execution.
 | !bestiary | Shows information about last npc you interacted with. | !bestiary |
 | !battle | Starts battle with current npc. DM role required. | !battle |
 
-## Custom mechanics support:
+## Custom mechanics support: <a name="custom"></a>
 
 Dandy can support you with several custom mechanics by creating atmosphere.
 
@@ -123,7 +123,7 @@ If your NPC has an ability to control nightmares, Dandy will
 switch music to horror sound effect or send a random
 horror picture at a random point in time.
 
-## Additional info
+## Additional info <a name="info"></a>
 
 Application can utilize docker functionality:
 
