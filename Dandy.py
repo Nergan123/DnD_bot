@@ -58,11 +58,13 @@ class Dandy_bot:
         self.playing = False
         self.channel = ''
         self.voice_channel = ''
-        self.load_state()
+        if os.path.isfile('dandy_state.json'):
+            self.load_state()
         if self.battle:
             if self.mechanics == 'Sanity':
                 self.sanity_mec = sanity(self.players)
-                self.sanity_mec.load_state()
+                if os.path.isfile('sanity_data.json'):
+                    self.sanity_mec.load_state()
             elif self.mechanics == 'Nightmare':
                 self.nightmare_mec = nightmare()
 
