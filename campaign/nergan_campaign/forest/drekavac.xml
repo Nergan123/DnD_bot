@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <npc>
+        <Name>Drekavac</Name>
+        <Boss>0</Boss>
+        <Image>forest/drekavac.jpg</Image>
+        <Mechanics>None</Mechanics>
+        <Bestiary>His screams can be heard in the deepest parts of the woods. A cursed stillborn child who's spirit is now roaming the woods.</Bestiary>
+    </npc>
+</root>

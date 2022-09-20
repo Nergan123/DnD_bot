@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <npc>
+        <Name>Leshiy</Name>
+        <Boss>1</Boss>
+        <Image>forest/leshiy.jpg</Image>
+        <Mechanics>Illusions</Mechanics>
+        <Bestiary>King of the empty trails. He is the one who owns that forest.</Bestiary>
+    </npc>
+</root>

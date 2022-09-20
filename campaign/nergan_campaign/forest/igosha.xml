@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <npc>
+        <Name>Igosha</Name>
+        <Boss>0</Boss>
+        <Image>forest/igosha_art.jpg</Image>
+        <Mechanics>None</Mechanics>
+        <Bestiary>Child of swamp Kikimora or stillborn babies. Cursed by their own parents or not baptized.</Bestiary>
+    </npc>
+</root>

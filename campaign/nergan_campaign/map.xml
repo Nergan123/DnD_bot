@@ -86,4 +86,37 @@
         <NPC name="Koshei">arcona_ruins/koshei.xml</NPC>
         <NPC name="Ice_mephit">arcona_frozen/ice_mephit.xml</NPC>
     </location>
+    <location Name="Forest" image='forest/forest_start.jpg'>
+        <music_calm>
+            <url>https://www.youtube.com/watch?v=HAw37tUHcOo</url>
+            <url>https://www.youtube.com/watch?v=xNN7iTA57jM</url>
+            <url>https://www.youtube.com/watch?v=9osre3R0LvA</url>
+            <url>https://www.youtube.com/watch?v=KVbXdWJ8BF4</url>
+        </music_calm>
+        <music_battle>
+            <url>https://www.youtube.com/watch?v=ZcNyPdipjeU</url>
+            <url>https://www.youtube.com/watch?v=K-i7KliDOmM</url>
+            <url>https://www.youtube.com/watch?v=pGw2ztHACxA</url>
+        </music_battle>
+        <NPC name="Upyr">arcona_ruins/upyr.xml</NPC>
+        <NPC name="Kikimora">beginning/kikimora.xml</NPC>
+        <NPC name="Igosha">forest/igosha.xml</NPC>
+    </location>
+    <location Name="Forest_deep" image='forest/forest_start.jpg'>
+        <music_calm>
+            <url>https://www.youtube.com/watch?v=knHOpHg3pL4</url>
+            <url>https://www.youtube.com/watch?v=Iq50wDUOXFU</url>
+            <url>https://www.youtube.com/watch?v=fregGErV_Cc</url>
+            <url>https://www.youtube.com/watch?v=128kAIlwh4g</url>
+        </music_calm>
+        <music_battle>
+            <url>https://www.youtube.com/watch?v=nNBIL0LGUDU</url>
+            <url>https://www.youtube.com/watch?v=3kJpSDQQ_ys</url>
+            <url>https://www.youtube.com/watch?v=7UZAouOzUuQ</url>
+            <url>https://www.youtube.com/watch?v=6T7fE5JRO10</url>
+        </music_battle>
+        <NPC name="Igosha">forest/igosha.xml</NPC>
+        <NPC name="Drekavac">forest/drekavac.xml</NPC>
+        <NPC name="Leshiy">forest/leshiy.xml</NPC>
+    </location>
 </root>
