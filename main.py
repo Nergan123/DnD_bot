@@ -462,5 +462,74 @@ async def volume(ctx, vol: int):
             await ctx.send('Please enter a volume between 0 and 100')
 
 
+@bot.command(name='swap', help='Shuffles names.')
+async def name_swap(ctx):
+    Dandy.channel = ctx.channel.id
+    role = get(ctx.guild.roles, name="DM")
+    if role not in ctx.message.author.roles:
+        await ctx.send("Only DM can use this command!")
+        return
+
+    if Dandy.mechanics == 'Illusions':
+        await ctx.message.delete()
+        new_names = Dandy.illusion_mec.swap()
+        counter = 0
+        for new_name in new_names:
+            user = await ctx.guild.fetch_member(Dandy.illusion_mec.ids_orig[counter])
+            Dandy.illusion_mec.names_orig[counter] = user.name
+            role = get(ctx.guild.roles, name="Admin")
+            if role not in user.roles:
+                await user.edit(nick=new_name)
+            counter += 1
+        return
+    else:
+        await ctx.send("Can't do that right now.")
+        return
+
+
+@bot.command(name='restore', help='Restores players names')
+async def name_restore(ctx):
+    Dandy.channel = ctx.channel.id
+    role = get(ctx.guild.roles, name="DM")
+    if role not in ctx.message.author.roles:
+        await ctx.send("Only DM can use this command!")
+        return
+
+    if Dandy.mechanics == 'Illusions':
+        await ctx.message.delete()
+        counter = 0
+        for new_name in Dandy.illusion_mec.names_orig:
+            user = await ctx.guild.fetch_member(Dandy.illusion_mec.ids_orig[counter])
+            role = get(ctx.guild.roles, name="Admin")
+            if role not in user.roles:
+                await user.edit(nick=new_name)
+            counter += 1
+        return
+    else:
+        await ctx.send("Can't do that right now.")
+        return
+
+
+@bot.command(name='transform', help='Turns random player into Leshiy')
+async def transformation(ctx):
+    Dandy.channel = ctx.channel.id
+    role = get(ctx.guild.roles, name="DM")
+    if role not in ctx.message.author.roles:
+        await ctx.send("Only DM can use this command!")
+        return
+
+    if Dandy.mechanics == 'Illusions':
+        await ctx.message.delete()
+        chosen = random.choice(Dandy.id)
+        Dandy.illusion_mec.transform(chosen)
+        user = await ctx.guild.fetch_member(chosen)
+        role = get(ctx.guild.roles, name="DM")
+        if role not in user.roles:
+            await user.edit(nick='Leshiy')
+    else:
+        await ctx.send("Can't do that right now.")
+        return
+
+
 if __name__ == "__main__":
     bot.run(token)

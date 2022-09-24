@@ -8,6 +8,7 @@ import boto3
 from parser import *
 from mechanics.sanity import *
 from mechanics.nightmare import *
+from mechanics.illusions import *
 
 
 class Dandy_bot:
@@ -58,15 +59,15 @@ class Dandy_bot:
         self.playing = False
         self.channel = ''
         self.voice_channel = ''
-        if os.path.isfile('dandy_state.json'):
-            self.load_state()
+        self.load_state()
         if self.battle:
             if self.mechanics == 'Sanity':
                 self.sanity_mec = sanity(self.players)
-                if os.path.isfile('sanity_data.json'):
-                    self.sanity_mec.load_state()
+                self.sanity_mec.load_state()
             elif self.mechanics == 'Nightmare':
                 self.nightmare_mec = nightmare()
+            elif self.mechanics == 'Illusions':
+                self.illusion_mec = illusions(self.players, self.id)
 
         # AWS_ACCESS_KEY_ID
         # AWS_SECRET_ACCESS_KEY
@@ -202,9 +203,10 @@ class Dandy_bot:
             self.sanity_mec = sanity(self.players)
         elif self.mechanics == 'Nightmare':
             self.nightmare_mec = nightmare()
+        elif self.mechanics == 'Illusions':
+            self.illusion_mec = illusions(self.players, self.id)
 
 
 # TODO add Iriy location to xml
-# TODO ffmpeg for linux
 # TODO add this https://www.youtube.com/watch?v=1rgDPmnAUtE to forest music, this https://www.youtube.com/watch?v=bsvzP8EO65w to Koshey
 # TODO add this for ending song https://www.youtube.com/watch?v=6FJXjJeOU6Q

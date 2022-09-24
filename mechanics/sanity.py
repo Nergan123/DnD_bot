@@ -60,7 +60,7 @@ class sanity:
         # s3 = boto3.client('s3')
         # s3_response = s3.get_object(Bucket=self.STATE_BUCKET, Key=self.STATE_REMOTE_FILE_NAME)
         # state_json = s3_response['Body'].read()
-        with open('sanity_data.json', 'w') as f:
+        with open('sanity_data.json', 'r') as f:
             state = json.loads(f.read())
         print(state)
         for property_name in self.SERIALIZABLE_FIELDS:

@@ -102,7 +102,7 @@
         <NPC name="Kikimora">beginning/kikimora.xml</NPC>
         <NPC name="Igosha">forest/igosha.xml</NPC>
     </location>
-    <location Name="Forest_deep" image='forest/forest_start.jpg'>
+    <location Name="Forest_deep" image='forest/forest_deep.jpg'>
         <music_calm>
             <url>https://www.youtube.com/watch?v=knHOpHg3pL4</url>
             <url>https://www.youtube.com/watch?v=Iq50wDUOXFU</url>
