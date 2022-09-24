@@ -510,7 +510,7 @@ async def name_restore(ctx):
         return
 
 
-@bot.command(name='transform', help='Turns random player into Leshiy')
+@bot.command(name='transform', help='Turns random player into NPC')
 async def transformation(ctx):
     Dandy.channel = ctx.channel.id
     role = get(ctx.guild.roles, name="DM")
@@ -525,7 +525,7 @@ async def transformation(ctx):
         user = await ctx.guild.fetch_member(chosen)
         role = get(ctx.guild.roles, name="DM")
         if role not in user.roles:
-            await user.edit(nick='Leshiy')
+            await user.edit(nick=Dandy.name_npc)
     else:
         await ctx.send("Can't do that right now.")
         return
