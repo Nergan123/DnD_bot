@@ -123,6 +123,17 @@ If your NPC has an ability to control nightmares, Dandy will
 switch music to horror sound effect or send a random
 horror picture at a random point in time.
 
+### Illusions:
+
+If NPC has an ability to create illusions, bot will
+provide you with 2 commands in order to control names of 
+your players
+
+|Command |Description |Example |
+|:-------:|:----------:|:-------:|
+| !swap | Swaps names of the players randomly | !swap|
+| !transform | Switches name of random player to ne the name of the NPC | !transform |
+
 ## Additional info <a name="info"></a>
 
 Application can utilize docker functionality:

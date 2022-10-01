@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <npc>
+        <Name>Ice worm</Name>
+        <Boss>0</Boss>
+        <Image>farms/worm.jpg</Image>
+        <Mechanics>None</Mechanics>
+        <Bestiary>I can't find any info about it... You are on your own.</Bestiary>
+    </npc>
+</root>

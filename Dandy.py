@@ -136,6 +136,7 @@ class Dandy_bot:
 
     def roll(self, number_of_dice, number_of_sides, user='', dm=False):
         output = ''
+        summ = 0
         if number_of_dice == 1 and number_of_sides == 20:
             roll = random.choice(range(1, number_of_sides+1))
             throw_list = self.dice_comments[self.dice_comments.dice == roll]
@@ -148,10 +149,11 @@ class Dandy_bot:
             for throw in range(number_of_dice):
                 roll = random.choice(range(1, number_of_sides+1))
                 output = output + ' ' + str(roll)
+                summ = summ + roll
             if dm and self.battle:
-                output = '**' + f'{self.name_npc} rolls ' + output + '**'
+                output = '**' + f'{self.name_npc} rolls ' + output + f' = {summ}' + '**'
             else:
-                output = '**' + f'{user} rolls ' + output + '**'
+                output = '**' + f'{user} rolls ' + output + f' = {summ}' + '**'
 
         return output
 
