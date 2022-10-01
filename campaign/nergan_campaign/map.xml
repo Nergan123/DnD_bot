@@ -121,7 +121,6 @@
     </location>
     <location Name="Farms" image='farms/image.jpg'>
         <music_calm>
-            <url>https://www.youtube.com/watch?v=HJLaTSjnd9Q</url>
             <url>https://www.youtube.com/watch?v=TZSA5HbOIEA</url>
             <url>https://www.youtube.com/watch?v=0Rcs5ledERk</url>
             <url>https://www.youtube.com/watch?v=w7RyCjXgwSA</url>
@@ -132,5 +131,17 @@
             <url>https://www.youtube.com/watch?v=Kx8dWVuNNqA</url>
         </music_battle>
         <NPC name="Ice_worm">forest/ice_worm.xml</NPC>
+    </location>
+    <location Name="Farm_house" image="farms/home.png">
+        <music_calm>
+            <url>https://www.youtube.com/watch?v=DEeAN471boQ</url>
+            <url>https://www.youtube.com/watch?v=OCIAuyetTP4</url>
+            <url>https://www.youtube.com/watch?v=bF-ayUbGtu4</url>
+        </music_calm>
+        <music_battle>
+            <url>https://www.youtube.com/watch?v=c7ctL5apc84</url>
+            <url>https://www.youtube.com/watch?v=IvuUUBy3eHw</url>
+            <url>https://www.youtube.com/watch?v=EHvsApnM5Vo</url>
+        </music_battle>
     </location>
 </root>
