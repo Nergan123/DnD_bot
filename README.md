@@ -133,6 +133,7 @@ your players
 |:-------:|:----------:|:-------:|
 | !swap | Swaps names of the players randomly | !swap|
 | !transform | Switches name of random player to ne the name of the NPC | !transform |
+| !restore | Restores names of players | !restore |
 
 ## Additional info <a name="info"></a>
 
