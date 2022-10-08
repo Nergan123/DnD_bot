@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <npc>
+        <Name>Pale rider</Name>
+        <Boss>1</Boss>
+        <Image>hut/yaga.jpg</Image>
+        <Mechanics>Nightmare</Mechanics>
+        <Bestiary>Baba Yaga bone leg flies in a mortar. Eats kids. Known for her cruelty.</Bestiary>
+    </npc>
+</root>
