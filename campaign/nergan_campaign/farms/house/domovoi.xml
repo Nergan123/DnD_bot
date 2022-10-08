@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <npc>
+        <Name>Domovoi</Name>
+        <Boss>1</Boss>
+        <Image>farms/house/domovoi.jpg</Image>
+        <Mechanics>Illusions</Mechanics>
+        <Bestiary>Domovoi is the spirit of the house. He is the one protecting it. It is also believed that Kikimora is his wife...</Bestiary>
+    </npc>
+</root>

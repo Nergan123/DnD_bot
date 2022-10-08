@@ -143,5 +143,9 @@
             <url>https://www.youtube.com/watch?v=IvuUUBy3eHw</url>
             <url>https://www.youtube.com/watch?v=EHvsApnM5Vo</url>
         </music_battle>
+        <NPC name="Chimney">farms/house/chimney.xml</NPC>
+        <NPC name="Table">farms/house/table.xml</NPC>
+        <NPC name="Book">farms/house/book.xml</NPC>
+        <NPC name="Domovoi">farms/house/domovoi.xml</NPC>
     </location>
 </root>
