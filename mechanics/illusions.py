@@ -20,7 +20,7 @@ class illusions:
         self.ids_swapped = ids
         self.leshiy = ''
         self.orig_leshiy_name = ''
-        #self.load_state()
+        self.load_state()
 
     def swap(self):
         index = list(range(len(self.names_orig)))
