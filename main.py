@@ -29,15 +29,16 @@ async def on_ready():
 @bot.command(name='dice',
              help='Rolls the dice. Command example "!dice 2d6"')
 async def roll(ctx, message):
-    role = get(ctx.guild.roles, name="DM")
-    if role in ctx.message.author.roles:
-        dm = True
-    else:
-        dm = False
-    message = message.split('d')
-    author = ctx.message.author.display_name
-    message_back = Dandy.roll(int(message[0]), int(message[1]), author, dm)
-    await ctx.send(message_back)
+    if not Dandy.initiative:
+        role = get(ctx.guild.roles, name="DM")
+        if role in ctx.message.author.roles:
+            dm = True
+        else:
+            dm = False
+        message = message.split('d')
+        author = ctx.message.author.display_name
+        message_back = Dandy.roll(int(message[0]), int(message[1]), author, dm)
+        await ctx.send(message_back)
 
 
 @bot.command(name='login', help='Adds a player to the campaign list. Example "!login Name"')
@@ -303,6 +304,7 @@ async def battle(ctx):
         return
 
     Dandy.start_battle()
+    Dandy.initiative = True
     if ctx.voice_client:
         voice = get(bot.voice_clients, guild=ctx.guild)
         if voice.is_paused():
@@ -312,6 +314,35 @@ async def battle(ctx):
             await play(ctx)
     if Dandy.mechanics != '':
         mechanics_message.start()
+
+    for name in Dandy.players:
+        for obj in Dandy.player_object:
+            if name == obj.name:
+                player_id = obj.id_player
+        await ctx.send(f'Roll the initiative **{name}**')
+        await bot.wait_for('message',
+                           check=lambda x: x.author.id == player_id and
+                           x.content == '!dice 1d20',
+                           timeout=None,
+                           )
+        ini = 0
+        for obj in Dandy.player_object:
+            if name == obj.name:
+                ini = obj.initiative
+        val = random.randint(1, 20)
+        await ctx.send(f'**{name} rolls {val} + {ini} = {val + int(ini)}**')
+
+    await ctx.send(f'Roll the initiative **{Dandy.name_npc}**')
+    role = get(ctx.guild.roles, name="DM")
+    await bot.wait_for('message',
+                       check=lambda x: role in x.author.name.roles and
+                       x.content == '!dice 1d20',
+                       timeout=None,
+                       )
+    val = random.randint(1, 20)
+    await ctx.send(f'**{Dandy.name_npc} rolls {val}**')
+
+    Dandy.initiative = False
 
 
 @bot.command(name='damage_sanity')

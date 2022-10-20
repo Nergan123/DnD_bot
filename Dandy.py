@@ -26,7 +26,8 @@ class Dandy_bot(Base_class):
         'volume',
         'guild',
         'channel',
-        'voice_channel'
+        'voice_channel',
+        'initiative'
     ]
     STATE_BUCKET = "nergan-bot"
     STATE_REMOTE_FILE_NAME = "state.json"
@@ -60,6 +61,7 @@ class Dandy_bot(Base_class):
         self.playing = False
         self.channel = ''
         self.voice_channel = ''
+        self.initiative = False
         self.load_state()
 
         if os.path.isdir('players'):
