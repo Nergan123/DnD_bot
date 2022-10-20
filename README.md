@@ -86,6 +86,7 @@ Press *ctrl+C* to stop execution.
 | !end_interaction | Ends current interaction with npc. DM role required. | !end_interaction |
 | !bestiary | Shows information about last npc you interacted with. | !bestiary |
 | !battle | Starts battle with current npc. DM role required. | !battle |
+| !set_initiative | Sets players initiative modifier | !set_initiative Nergan 2|
 
 ## Custom mechanics support: <a name="custom"></a>
 
