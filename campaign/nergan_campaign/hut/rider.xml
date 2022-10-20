@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <npc>
+        <Name>Pale rider</Name>
+        <Boss>0</Boss>
+        <Image>hut/rider.jpg</Image>
+        <Mechanics>None</Mechanics>
+        <Bestiary>Pale rider. He is the bloodhound of Koshei, hunting those who dares to cross the path of Koshei.</Bestiary>
+    </npc>
+</root>

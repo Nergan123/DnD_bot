@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <npc>
+        <Name>Chimney</Name>
+        <Boss>0</Boss>
+        <Image>farms/house/chimney.jpg</Image>
+        <Mechanics>None</Mechanics>
+        <Bestiary>How is it even moving?</Bestiary>
+    </npc>
+</root>

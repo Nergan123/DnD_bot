@@ -121,7 +121,6 @@
     </location>
     <location Name="Farms" image='farms/image.jpg'>
         <music_calm>
-            <url>https://www.youtube.com/watch?v=HJLaTSjnd9Q</url>
             <url>https://www.youtube.com/watch?v=TZSA5HbOIEA</url>
             <url>https://www.youtube.com/watch?v=0Rcs5ledERk</url>
             <url>https://www.youtube.com/watch?v=w7RyCjXgwSA</url>
@@ -131,6 +130,58 @@
             <url>https://www.youtube.com/watch?v=yZBZ54JUThE</url>
             <url>https://www.youtube.com/watch?v=Kx8dWVuNNqA</url>
         </music_battle>
-        <NPC name="Ice_worm">forest/ice_worm.xml</NPC>
+        <NPC name="Ice_worm">farms/ice_worm.xml</NPC>
+    </location>
+    <location Name="Farm_house" image="farms/home.png">
+        <music_calm>
+            <url>https://www.youtube.com/watch?v=DEeAN471boQ</url>
+            <url>https://www.youtube.com/watch?v=OCIAuyetTP4</url>
+            <url>https://www.youtube.com/watch?v=bF-ayUbGtu4</url>
+        </music_calm>
+        <music_battle>
+            <url>https://www.youtube.com/watch?v=c7ctL5apc84</url>
+            <url>https://www.youtube.com/watch?v=IvuUUBy3eHw</url>
+            <url>https://www.youtube.com/watch?v=EHvsApnM5Vo</url>
+        </music_battle>
+        <NPC name="Chimney">farms/house/chimney.xml</NPC>
+        <NPC name="Table">farms/house/table.xml</NPC>
+        <NPC name="Book">farms/house/book.xml</NPC>
+        <NPC name="Domovoi">farms/house/domovoi.xml</NPC>
+    </location>
+    <location Name="Near_hut" image="hut/near_hut.png">
+        <music_calm>
+            <url>https://www.youtube.com/watch?v=6v3JQ7ydcKk</url>
+            <url>https://www.youtube.com/watch?v=ZhLINxd09Mg</url>
+            <url>https://www.youtube.com/watch?v=10P52OzMwTc</url>
+        </music_calm>
+        <music_battle>
+            <url>https://www.youtube.com/watch?v=V2p2vpvF4-c</url>
+            <url>https://www.youtube.com/watch?v=SiyOajnJnTg</url>
+        </music_battle>
+        <NPC name="Drekavac">forest/drekavac.xml</NPC>
+    </location>
+    <location Name="Hut" image="hut/inside.jpg">
+        <music_calm>
+            <url>https://www.youtube.com/watch?v=T3gVt9a4qGs</url>
+            <url>https://www.youtube.com/watch?v=4wGIXKLb3Hk</url>
+            <url>https://www.youtube.com/watch?v=jSlYVW6o-4M</url>
+        </music_calm>
+        <music_battle>
+            <url>https://www.youtube.com/watch?v=RNOzgNzZA7U</url>
+            <url>https://www.youtube.com/watch?v=cnHvuMwHxwI</url>
+        </music_battle>
+        <NPC name="Baba_Yaga">hut/yaga.xml</NPC>
+    </location>
+    <location Name="Lake" image="hut/lake.jpg">
+        <music_calm>
+            <url>https://www.youtube.com/watch?v=Qd-CwJa1SHE</url>
+            <url>https://www.youtube.com/watch?v=0lbwPrF5JmU</url>
+            <url>https://www.youtube.com/watch?v=6Y2WSKU2Nig</url>
+        </music_calm>
+        <music_battle>
+            <url>https://www.youtube.com/watch?v=1OVVTSXVrK4</url>
+            <url>https://www.youtube.com/watch?v=83QgzvgzCIA</url>
+        </music_battle>
+        <NPC name="Rider">hut/rider.xml</NPC>
     </location>
 </root>

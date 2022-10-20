@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <npc>
+        <Name>Table</Name>
+        <Boss>0</Boss>
+        <Image>farms/house/table.jpg</Image>
+        <Mechanics>None</Mechanics>
+        <Bestiary>Living table?</Bestiary>
+    </npc>
+</root>
