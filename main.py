@@ -41,9 +41,9 @@ async def roll(ctx, message):
 
 
 @bot.command(name='login', help='Adds a player to the campaign list. Example "!login Name"')
-async def add_player(ctx, name: str):
+async def add_player(ctx, name: str, proff=0):
     Dandy.channel = ctx.channel.id
-    out = Dandy.add_player(name, ctx.author.id)
+    out = Dandy.add_player(name, ctx.author.id, proff)
     if out:
         await ctx.send(f'Added {name}')
     else:
@@ -529,6 +529,15 @@ async def transformation(ctx):
     else:
         await ctx.send("Can't do that right now.")
         return
+
+
+@bot.command(name='set_initiative', help='Sets Player initiative modifier')
+async def proficiency_set(ctx, name, val):
+    if name in Dandy.players:
+        Dandy.initiative_set(name, val)
+        await ctx.send(f'{name} initiative modifier is set to {val}')
+    else:
+        await ctx.send('Player not found')
 
 
 if __name__ == "__main__":

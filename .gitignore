@@ -5,3 +5,4 @@ logs
 archive
 .dockerignore
 *.json
+players

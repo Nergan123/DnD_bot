@@ -1,9 +1,14 @@
+import os
 import sys
-from helpers.parser import *
-from mechanics.sanity import *
-from mechanics.nightmare import *
-from mechanics.illusions import *
-from helpers.base_class import *
+import json
+import pandas as pd
+import random
+from helpers.parser import Parser
+from mechanics.sanity import sanity
+from mechanics.nightmare import nightmare
+from mechanics.illusions import illusions
+from helpers.base_class import Base_class
+from helpers.player_object import Player
 
 
 class Dandy_bot(Base_class):
@@ -56,6 +61,25 @@ class Dandy_bot(Base_class):
         self.channel = ''
         self.voice_channel = ''
         self.load_state()
+
+        if os.path.isdir('players'):
+            self.player_object = []
+            player_files = os.listdir('players')
+            for file in player_files:
+                file = file.replace('_data.json', '')
+                self.player_object.append(Player(f'players/{file}'))
+                self.player_object[-1].load_state()
+        else:
+            os.mkdir('players')
+            for val, player_name in enumerate(self.players):
+                state = {
+                    'name': player_name,
+                    'id_player': self.id[val],
+                    'initiative': 0
+                }
+                with open(f'players/{player_name}_data.json', 'w') as f:
+                    json.dump(state, f)
+
         if self.battle:
             if self.mechanics == 'Sanity':
                 self.sanity_mec = sanity(self.players)
@@ -69,7 +93,7 @@ class Dandy_bot(Base_class):
         self.volume = vol
         self.save_state()
 
-    def add_player(self, name='', id=''):
+    def add_player(self, name='', id='', ini=0):
         if id in self.id:
             return False
         if name != '':
@@ -77,6 +101,11 @@ class Dandy_bot(Base_class):
                 self.players.append(name)
                 self.id.append(id)
                 self.save_state()
+                self.player_object.append(Player(f'players/{name}'))
+                self.player_object[-1].name = name
+                self.player_object[-1].id_player = id
+                self.player_object[-1].initiative = ini
+                self.player_object[-1].save_state()
                 return True
             else:
                 return False
@@ -85,12 +114,22 @@ class Dandy_bot(Base_class):
         if name != '':
             if name in self.players:
                 ind = self.players.index(name)
+                for val, obj_name in enumerate(self.player_object):
+                    if name == obj_name.name:
+                        os.remove(f'{obj_name.file_name}_data.json')
+                        self.player_object.pop(val)
                 self.players.remove(name)
                 self.id.pop(ind)
                 self.save_state()
                 return True
             else:
                 return False
+
+    def initiative_set(self, name, val):
+        for obj in self.player_object:
+            if obj.name == name:
+                obj.initiative = val
+                obj.save_state()
 
     def set_campaign(self, campaign=''):
         if campaign in os.listdir('campaign'):
