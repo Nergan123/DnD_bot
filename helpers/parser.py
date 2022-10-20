@@ -4,10 +4,10 @@ import random
 
 
 class Parser:
-    def __init__(self, campaign=''):
+    def __init__(self, campaign='', path=''):
         self.campaign = campaign
-        self.path = os.path.join(os.getcwd(), 'campaign', self.campaign, 'map.xml')
-        self.path_npc_xml = os.path.join(os.getcwd(), 'campaign', self.campaign)
+        self.path = os.path.join(path, 'campaign', self.campaign, 'map.xml')
+        self.path_npc_xml = os.path.join(path, 'campaign', self.campaign)
 
     def get_music(self, location='', battle=False):
         root_node = ET.parse(self.path).getroot()

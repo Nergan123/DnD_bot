@@ -1,9 +1,8 @@
-import json
 import random
-import os
+from helpers.base_class import Base_class
 
 
-class illusions:
+class illusions(Base_class):
     SERIALIZABLE_FIELDS = [
         'names_orig',
         'ids_orig',
@@ -14,6 +13,7 @@ class illusions:
     ]
 
     def __init__(self, player_list, ids):
+        super().__init__('illusions')
         self.names_orig = player_list
         self.ids_orig = ids
         self.names_swapped = player_list
@@ -34,29 +34,8 @@ class illusions:
 
         return self.names_swapped
 
-    def transform(self, id):
-        self.leshiy = id
-        index = self.ids_orig.index(id)
+    def transform(self, id_name):
+        self.leshiy = id_name
+        index = self.ids_orig.index(id_name)
         self.orig_leshiy_name = self.names_orig[index]
         self.save_state()
-
-    def save_state(self):
-        state = {}
-        for property_name in self.SERIALIZABLE_FIELDS:
-            state[property_name] = self.__getattribute__(property_name)
-
-        # s3 = boto3.resource('s3')
-        # remote_object = s3.Object(self.STATE_BUCKET, self.STATE_REMOTE_FILE_NAME)
-        # remote_object.put(Body=(bytes(json.dumps(state).encode('UTF-8'))))
-        with open('illusions_data.json', 'w') as f:
-            json.dump(state, f)
-
-    def load_state(self):
-        # s3 = boto3.client('s3')
-        # s3_response = s3.get_object(Bucket=self.STATE_BUCKET, Key=self.STATE_REMOTE_FILE_NAME)
-        # state_json = s3_response['Body'].read()
-        with open('illusions_data.json', 'r') as f:
-            state = json.loads(f.read())
-        print(state)
-        for property_name in self.SERIALIZABLE_FIELDS:
-            self.__setattr__(property_name, state[property_name])

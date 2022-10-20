@@ -1,17 +1,12 @@
-import json
-import os
-import random
-import time
 import sys
-import pandas as pd
-import boto3
-from parser import *
+from helpers.parser import *
 from mechanics.sanity import *
 from mechanics.nightmare import *
 from mechanics.illusions import *
+from helpers.base_class import *
 
 
-class Dandy_bot:
+class Dandy_bot(Base_class):
     SERIALIZABLE_FIELDS = [
         'location',
         'interaction_ongoing',
@@ -32,6 +27,7 @@ class Dandy_bot:
     STATE_REMOTE_FILE_NAME = "state.json"
 
     def __init__(self, campaign=''):
+        super().__init__('dandy')
         if campaign == '':
             self.campaign = 'nergan_campaign'
         else:
@@ -40,7 +36,7 @@ class Dandy_bot:
             self.platform = 'linux'
         else:
             self.platform = 'windows'
-        self.parser = Parser(self.campaign)
+        self.parser = Parser(self.campaign, os.getcwd())
         self.guild = ''
         self.campaign_path = os.path.join(os.getcwd(), 'campaign', self.campaign)
         self.location = ''
@@ -68,32 +64,6 @@ class Dandy_bot:
                 self.nightmare_mec = nightmare()
             elif self.mechanics == 'Illusions':
                 self.illusion_mec = illusions(self.players, self.id)
-
-        # AWS_ACCESS_KEY_ID
-        # AWS_SECRET_ACCESS_KEY
-
-# TODO Fix sanity load and save system
-
-    def save_state(self):
-        state = {}
-        for property_name in self.SERIALIZABLE_FIELDS:
-            state[property_name] = self.__getattribute__(property_name)
-
-        # s3 = boto3.resource('s3')
-        # remote_object = s3.Object(self.STATE_BUCKET, self.STATE_REMOTE_FILE_NAME)
-        # remote_object.put(Body=(bytes(json.dumps(state).encode('UTF-8'))))
-        with open('dandy_data.json', 'w') as f:
-            json.dump(state, f)
-
-    def load_state(self):
-        # s3 = boto3.client('s3')
-        # s3_response = s3.get_object(Bucket=self.STATE_BUCKET, Key=self.STATE_REMOTE_FILE_NAME)
-        # state_json = s3_response['Body'].read()
-        with open('dandy_data.json', 'r') as f:
-            state = json.loads(f.read())
-        print(state)
-        for property_name in self.SERIALIZABLE_FIELDS:
-            self.__setattr__(property_name, state[property_name])
 
     def set_volume(self, vol: float):
         self.volume = vol

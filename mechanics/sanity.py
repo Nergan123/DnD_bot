@@ -1,11 +1,10 @@
 import time
 import random
 import pandas as pd
-import boto3
-import json
+from helpers.base_class import Base_class
 
 
-class sanity:
+class sanity(Base_class):
     SERIALIZABLE_FIELDS = [
         'sanity_level',
         'sanity_timers'
@@ -14,6 +13,7 @@ class sanity:
     STATE_REMOTE_FILE_NAME = "state_sanity.json"
 
     def __init__(self, players):
+        super().__init__('sanity')
         self.players = players
         self.sanity_level = [100 for player in self.players]
         self.sanity_timers = [time.time() + 180 for player in self.players]
@@ -44,24 +44,3 @@ class sanity:
             output = output + player + "'s sanity level" + ': ' + str(self.sanity_level[i]) + '%\n'
 
         return output
-
-    def save_state(self):
-        state = {}
-        for property_name in self.SERIALIZABLE_FIELDS:
-            state[property_name] = self.__getattribute__(property_name)
-
-        # s3 = boto3.resource('s3')
-        # remote_object = s3.Object(self.STATE_BUCKET, self.STATE_REMOTE_FILE_NAME)
-        # remote_object.put(Body=(bytes(json.dumps(state).encode('UTF-8'))))
-        with open('sanity_data.json', 'w') as f:
-            json.dump(state, f)
-
-    def load_state(self):
-        # s3 = boto3.client('s3')
-        # s3_response = s3.get_object(Bucket=self.STATE_BUCKET, Key=self.STATE_REMOTE_FILE_NAME)
-        # state_json = s3_response['Body'].read()
-        with open('sanity_data.json', 'r') as f:
-            state = json.loads(f.read())
-        print(state)
-        for property_name in self.SERIALIZABLE_FIELDS:
-            self.__setattr__(property_name, state[property_name])
