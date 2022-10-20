@@ -130,7 +130,7 @@
             <url>https://www.youtube.com/watch?v=yZBZ54JUThE</url>
             <url>https://www.youtube.com/watch?v=Kx8dWVuNNqA</url>
         </music_battle>
-        <NPC name="Ice_worm">forest/ice_worm.xml</NPC>
+        <NPC name="Ice_worm">farms/ice_worm.xml</NPC>
     </location>
     <location Name="Farm_house" image="farms/home.png">
         <music_calm>
