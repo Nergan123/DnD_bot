@@ -5,7 +5,8 @@ class Player(Base_class):
     SERIALIZABLE_FIELDS = [
         'name',
         'id_player',
-        'initiative'
+        'initiative',
+        'rolled_initiative'
     ]
 
     def __init__(self, file_name):
@@ -14,3 +15,4 @@ class Player(Base_class):
         self.name = ''
         self.id_player = ''
         self.initiative = ''
+        self.rolled_initiative = ''

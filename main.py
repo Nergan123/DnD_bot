@@ -320,29 +320,37 @@ async def battle(ctx):
             if name == obj.name:
                 player_id = obj.id_player
         await ctx.send(f'Roll the initiative **{name}**')
+        role = get(ctx.guild.roles, name="DM")
         await bot.wait_for('message',
-                           check=lambda x: x.author.id == player_id and
+                           check=lambda x: ((x.author.id == player_id) or (role in x.author.roles)) and
                            x.content == '!dice 1d20',
                            timeout=None,
                            )
         ini = 0
+        val = random.randint(1, 20)
         for obj in Dandy.player_object:
             if name == obj.name:
                 ini = obj.initiative
-        val = random.randint(1, 20)
+                obj.rolled_initiative = val + int(ini)
+                print(obj.rolled_initiative)
+                obj.save_state()
         await ctx.send(f'**{name} rolls {val} + {ini} = {val + int(ini)}**')
 
     await ctx.send(f'Roll the initiative **{Dandy.name_npc}**')
     role = get(ctx.guild.roles, name="DM")
     await bot.wait_for('message',
-                       check=lambda x: role in x.author.name.roles and
+                       check=lambda x: role in x.author.roles and
                        x.content == '!dice 1d20',
                        timeout=None,
                        )
     val = random.randint(1, 20)
+    Dandy.npc_initiative = val
     await ctx.send(f'**{Dandy.name_npc} rolls {val}**')
 
     Dandy.initiative = False
+    queue, message = Dandy.create_queue()
+    print(queue)
+    await ctx.send(message)
 
 
 @bot.command(name='damage_sanity')
@@ -569,6 +577,36 @@ async def proficiency_set(ctx, name, val):
         await ctx.send(f'{name} initiative modifier is set to {val}')
     else:
         await ctx.send('Player not found')
+
+
+@bot.command(name='get_queue', help='Sends players turns')
+async def get_queue(ctx):
+    message = '**---Turns calculated---**\n'
+    counter = 1
+    for name in Dandy.queue:
+        message = message + f'**{counter}:** {name}\n'
+        counter += 1
+
+    message = message + '**------------------------**\n'
+
+    await ctx.send(message)
+
+
+@bot.command(name='turn', help='Next turn')
+async def turn(ctx):
+    if Dandy.battle:
+        message = Dandy.next_turn()
+        await ctx.send(message)
+    else:
+        await ctx.send('Your not in battle')
+
+
+@bot.command(name='get_turn', help='Returns current turn')
+async def get_turn(ctx):
+    if Dandy.battle:
+        await ctx.send(f'**{Dandy.queue[Dandy.current_turn]}**')
+    else:
+        await ctx.send('Your not in battle')
 
 
 if __name__ == "__main__":

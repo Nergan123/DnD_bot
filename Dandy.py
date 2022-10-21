@@ -27,7 +27,10 @@ class Dandy_bot(Base_class):
         'guild',
         'channel',
         'voice_channel',
-        'initiative'
+        'initiative',
+        'npc_initiative',
+        'queue',
+        'current_turn'
     ]
     STATE_BUCKET = "nergan-bot"
     STATE_REMOTE_FILE_NAME = "state.json"
@@ -56,16 +59,19 @@ class Dandy_bot(Base_class):
         self.boss = False
         self.battle = False
         self.players = []
+        self.queue = []
         self.id = []
         self.volume = 1.0
         self.playing = False
         self.channel = ''
         self.voice_channel = ''
         self.initiative = False
+        self.player_object = []
+        self.npc_initiative = 0
+        self.current_turn = 0
         self.load_state()
 
         if os.path.isdir('players'):
-            self.player_object = []
             player_files = os.listdir('players')
             for file in player_files:
                 file = file.replace('_data.json', '')
@@ -77,8 +83,10 @@ class Dandy_bot(Base_class):
                 state = {
                     'name': player_name,
                     'id_player': self.id[val],
-                    'initiative': 0
+                    'initiative': 0,
+                    'rolled_initiative': 0
                 }
+                self.player_object.append(Player(f'players/{player_name}_data.json'))
                 with open(f'players/{player_name}_data.json', 'w') as f:
                     json.dump(state, f)
 
@@ -107,6 +115,7 @@ class Dandy_bot(Base_class):
                 self.player_object[-1].name = name
                 self.player_object[-1].id_player = id
                 self.player_object[-1].initiative = ini
+                self.player_object[-1].rolled_initiative = 0
                 self.player_object[-1].save_state()
                 return True
             else:
@@ -218,6 +227,45 @@ class Dandy_bot(Base_class):
             self.nightmare_mec = nightmare()
         elif self.mechanics == 'Illusions':
             self.illusion_mec = illusions(self.players, self.id)
+
+    def create_queue(self):
+        self.current_turn = 0
+        initiatives = []
+        names = []
+        for obj in self.player_object:
+            if obj.name in self.players:
+                initiatives.append(obj.rolled_initiative)
+                names.append(obj.name)
+
+        initiatives.append(self.npc_initiative)
+        names.append(self.name_npc)
+
+        initiatives, names = zip(*sorted(zip(initiatives, names)))
+        self.queue = names
+        self.save_state()
+
+        message = '**---Turns calculated---**\n'
+        counter = 1
+        for name in self.queue:
+            message = message + f'**{counter}:** {name}\n'
+            counter += 1
+
+        message = message + '**------------------------**\n\n'
+        message = message + f'You start **{self.queue[self.current_turn]}**'
+
+        return self.queue, message
+
+    def next_turn(self):
+        self.current_turn += 1
+        if self.current_turn >= len(self.queue):
+            self.current_turn = 0
+
+        self.save_state()
+        with open('comments_data/turns', 'r') as fp:
+            data = fp.readlines()
+
+        message = random.choice(data).replace('\n', '') + f' **{self.queue[self.current_turn]}**'
+        return message
 
 
 # TODO add Iriy location to xml
