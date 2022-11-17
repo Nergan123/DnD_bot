@@ -159,6 +159,7 @@
             <url>https://www.youtube.com/watch?v=SiyOajnJnTg</url>
         </music_battle>
         <NPC name="Drekavac">forest/drekavac.xml</NPC>
+        <NPC name="Baba_Yaga">hut/yaga.xml</NPC>
     </location>
     <location Name="Hut" image="hut/inside.jpg">
         <music_calm>

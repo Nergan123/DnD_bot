@@ -240,8 +240,8 @@ class Dandy_bot(Base_class):
         initiatives.append(self.npc_initiative)
         names.append(self.name_npc)
 
-        initiatives, names = zip(*sorted(zip(initiatives, names)))
-        self.queue = names
+        initiatives_new, names_new = zip(*sorted(zip(initiatives, names)))
+        self.queue = names_new[::-1]
         self.save_state()
 
         message = '**---Turns calculated---**\n'
