@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <npc>
+        <Name>Krasin House representative</Name>
+        <Boss>0</Boss>
+        <Image>iriy/krasin.jpg</Image>
+        <Mechanics>None</Mechanics>
+        <Bestiary>House Krasin believes that everyone should be treated equally, weather they want it or not.</Bestiary>
+    </npc>
+</root>

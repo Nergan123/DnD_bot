@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <npc>
+        <Name>Citizen</Name>
+        <Boss>0</Boss>
+        <Image>iriy/citizen_m.jpg</Image>
+        <Mechanics>None</Mechanics>
+        <Bestiary>This citizen probably has never left the walls of his city. Maybe he dreams of becoming an adventurer like you?</Bestiary>
+    </npc>
+</root>

@@ -268,7 +268,6 @@ class Dandy_bot(Base_class):
         return message
 
 
-# TODO add Iriy location to xml
-# TODO add this https://www.youtube.com/watch?v=1rgDPmnAUtE to forest music, this https://www.youtube.com/watch?v=bsvzP8EO65w to Koshey
 # TODO add this for ending song https://www.youtube.com/watch?v=6FJXjJeOU6Q
 # TODO add this to elven lands <url>https://www.youtube.com/watch?v=HJLaTSjnd9Q</url>
+# TODO https://www.youtube.com/watch?v=PuRFNzizkXs
