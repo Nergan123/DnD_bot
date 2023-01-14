@@ -29,21 +29,22 @@ async def on_ready():
 @bot.command(name='dice',
              help='Rolls the dice. Command example "!dice 2d6"')
 async def roll(ctx, message):
-    role = get(ctx.guild.roles, name="DM")
-    if role in ctx.message.author.roles:
-        dm = True
-    else:
-        dm = False
-    message = message.split('d')
-    author = ctx.message.author.display_name
-    message_back = Dandy.roll(int(message[0]), int(message[1]), author, dm)
-    await ctx.send(message_back)
+    if not Dandy.initiative:
+        role = get(ctx.guild.roles, name="DM")
+        if role in ctx.message.author.roles:
+            dm = True
+        else:
+            dm = False
+        message = message.split('d')
+        author = ctx.message.author.display_name
+        message_back = Dandy.roll(int(message[0]), int(message[1]), author, dm)
+        await ctx.send(message_back)
 
 
 @bot.command(name='login', help='Adds a player to the campaign list. Example "!login Name"')
-async def add_player(ctx, name: str):
+async def add_player(ctx, name: str, proff=0):
     Dandy.channel = ctx.channel.id
-    out = Dandy.add_player(name, ctx.author.id)
+    out = Dandy.add_player(name, ctx.author.id, proff)
     if out:
         await ctx.send(f'Added {name}')
     else:
@@ -303,6 +304,7 @@ async def battle(ctx):
         return
 
     Dandy.start_battle()
+    Dandy.initiative = True
     if ctx.voice_client:
         voice = get(bot.voice_clients, guild=ctx.guild)
         if voice.is_paused():
@@ -312,6 +314,43 @@ async def battle(ctx):
             await play(ctx)
     if Dandy.mechanics != '':
         mechanics_message.start()
+
+    for name in Dandy.players:
+        for obj in Dandy.player_object:
+            if name == obj.name:
+                player_id = obj.id_player
+        await ctx.send(f'Roll the initiative **{name}**')
+        role = get(ctx.guild.roles, name="DM")
+        await bot.wait_for('message',
+                           check=lambda x: ((x.author.id == player_id) or (role in x.author.roles)) and
+                           x.content == '!dice 1d20',
+                           timeout=None,
+                           )
+        ini = 0
+        val = random.randint(1, 20)
+        for obj in Dandy.player_object:
+            if name == obj.name:
+                ini = obj.initiative
+                obj.rolled_initiative = val + int(ini)
+                print(obj.rolled_initiative)
+                obj.save_state()
+        await ctx.send(f'**{name} rolls {val} + {ini} = {val + int(ini)}**')
+
+    await ctx.send(f'Roll the initiative **{Dandy.name_npc}**')
+    role = get(ctx.guild.roles, name="DM")
+    await bot.wait_for('message',
+                       check=lambda x: role in x.author.roles and
+                       x.content == '!dice 1d20',
+                       timeout=None,
+                       )
+    val = random.randint(1, 20)
+    Dandy.npc_initiative = val
+    await ctx.send(f'**{Dandy.name_npc} rolls {val}**')
+
+    Dandy.initiative = False
+    queue, message = Dandy.create_queue()
+    print(queue)
+    await ctx.send(message)
 
 
 @bot.command(name='damage_sanity')
@@ -529,6 +568,45 @@ async def transformation(ctx):
     else:
         await ctx.send("Can't do that right now.")
         return
+
+
+@bot.command(name='set_initiative', help='Sets Player initiative modifier')
+async def proficiency_set(ctx, name, val):
+    if name in Dandy.players:
+        Dandy.initiative_set(name, val)
+        await ctx.send(f'{name} initiative modifier is set to {val}')
+    else:
+        await ctx.send('Player not found')
+
+
+@bot.command(name='get_queue', help='Sends players turns')
+async def get_queue(ctx):
+    message = '**---Turns calculated---**\n'
+    counter = 1
+    for name in Dandy.queue:
+        message = message + f'**{counter}:** {name}\n'
+        counter += 1
+
+    message = message + '**------------------------**\n'
+
+    await ctx.send(message)
+
+
+@bot.command(name='turn', help='Next turn')
+async def turn(ctx):
+    if Dandy.battle:
+        message = Dandy.next_turn()
+        await ctx.send(message)
+    else:
+        await ctx.send('Your not in battle')
+
+
+@bot.command(name='get_turn', help='Returns current turn')
+async def get_turn(ctx):
+    if Dandy.battle:
+        await ctx.send(f'**{Dandy.queue[Dandy.current_turn]}**')
+    else:
+        await ctx.send('Your not in battle')
 
 
 if __name__ == "__main__":

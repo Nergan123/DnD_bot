@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <npc>
+        <Name>Belina House representative</Name>
+        <Boss>0</Boss>
+        <Image>iriy/belina.jpg</Image>
+        <Mechanics>None</Mechanics>
+        <Bestiary>They are pretty much the most popular fraction among the peasants.</Bestiary>
+    </npc>
+</root>

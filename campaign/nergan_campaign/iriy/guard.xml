@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <npc>
+        <Name>City Guard</Name>
+        <Boss>0</Boss>
+        <Image>iriy/guard.jpg</Image>
+        <Mechanics>None</Mechanics>
+        <Bestiary>City guard. His armor looks more advanced than the one in Arcona</Bestiary>
+    </npc>
+</root>

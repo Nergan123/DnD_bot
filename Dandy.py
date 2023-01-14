@@ -1,9 +1,14 @@
+import os
 import sys
-from helpers.parser import *
-from mechanics.sanity import *
-from mechanics.nightmare import *
-from mechanics.illusions import *
-from helpers.base_class import *
+import json
+import pandas as pd
+import random
+from helpers.parser import Parser
+from mechanics.sanity import sanity
+from mechanics.nightmare import nightmare
+from mechanics.illusions import illusions
+from helpers.base_class import Base_class
+from helpers.player_object import Player
 
 
 class Dandy_bot(Base_class):
@@ -21,7 +26,11 @@ class Dandy_bot(Base_class):
         'volume',
         'guild',
         'channel',
-        'voice_channel'
+        'voice_channel',
+        'initiative',
+        'npc_initiative',
+        'queue',
+        'current_turn'
     ]
     STATE_BUCKET = "nergan-bot"
     STATE_REMOTE_FILE_NAME = "state.json"
@@ -50,12 +59,37 @@ class Dandy_bot(Base_class):
         self.boss = False
         self.battle = False
         self.players = []
+        self.queue = []
         self.id = []
         self.volume = 1.0
         self.playing = False
         self.channel = ''
         self.voice_channel = ''
+        self.initiative = False
+        self.player_object = []
+        self.npc_initiative = 0
+        self.current_turn = 0
         self.load_state()
+
+        if os.path.isdir('players'):
+            player_files = os.listdir('players')
+            for file in player_files:
+                file = file.replace('_data.json', '')
+                self.player_object.append(Player(f'players/{file}'))
+                self.player_object[-1].load_state()
+        else:
+            os.mkdir('players')
+            for val, player_name in enumerate(self.players):
+                state = {
+                    'name': player_name,
+                    'id_player': self.id[val],
+                    'initiative': 0,
+                    'rolled_initiative': 0
+                }
+                self.player_object.append(Player(f'players/{player_name}_data.json'))
+                with open(f'players/{player_name}_data.json', 'w') as f:
+                    json.dump(state, f)
+
         if self.battle:
             if self.mechanics == 'Sanity':
                 self.sanity_mec = sanity(self.players)
@@ -69,7 +103,7 @@ class Dandy_bot(Base_class):
         self.volume = vol
         self.save_state()
 
-    def add_player(self, name='', id=''):
+    def add_player(self, name='', id='', ini=0):
         if id in self.id:
             return False
         if name != '':
@@ -77,6 +111,12 @@ class Dandy_bot(Base_class):
                 self.players.append(name)
                 self.id.append(id)
                 self.save_state()
+                self.player_object.append(Player(f'players/{name}'))
+                self.player_object[-1].name = name
+                self.player_object[-1].id_player = id
+                self.player_object[-1].initiative = ini
+                self.player_object[-1].rolled_initiative = 0
+                self.player_object[-1].save_state()
                 return True
             else:
                 return False
@@ -85,12 +125,22 @@ class Dandy_bot(Base_class):
         if name != '':
             if name in self.players:
                 ind = self.players.index(name)
+                for val, obj_name in enumerate(self.player_object):
+                    if name == obj_name.name:
+                        os.remove(f'{obj_name.file_name}_data.json')
+                        self.player_object.pop(val)
                 self.players.remove(name)
                 self.id.pop(ind)
                 self.save_state()
                 return True
             else:
                 return False
+
+    def initiative_set(self, name, val):
+        for obj in self.player_object:
+            if obj.name == name:
+                obj.initiative = val
+                obj.save_state()
 
     def set_campaign(self, campaign=''):
         if campaign in os.listdir('campaign'):
@@ -178,8 +228,46 @@ class Dandy_bot(Base_class):
         elif self.mechanics == 'Illusions':
             self.illusion_mec = illusions(self.players, self.id)
 
+    def create_queue(self):
+        self.current_turn = 0
+        initiatives = []
+        names = []
+        for obj in self.player_object:
+            if obj.name in self.players:
+                initiatives.append(obj.rolled_initiative)
+                names.append(obj.name)
 
-# TODO add Iriy location to xml
-# TODO add this https://www.youtube.com/watch?v=1rgDPmnAUtE to forest music, this https://www.youtube.com/watch?v=bsvzP8EO65w to Koshey
+        initiatives.append(self.npc_initiative)
+        names.append(self.name_npc)
+
+        initiatives_new, names_new = zip(*sorted(zip(initiatives, names)))
+        self.queue = names_new[::-1]
+        self.save_state()
+
+        message = '**---Turns calculated---**\n'
+        counter = 1
+        for name in self.queue:
+            message = message + f'**{counter}:** {name}\n'
+            counter += 1
+
+        message = message + '**------------------------**\n\n'
+        message = message + f'You start **{self.queue[self.current_turn]}**'
+
+        return self.queue, message
+
+    def next_turn(self):
+        self.current_turn += 1
+        if self.current_turn >= len(self.queue):
+            self.current_turn = 0
+
+        self.save_state()
+        with open('comments_data/turns', 'r') as fp:
+            data = fp.readlines()
+
+        message = random.choice(data).replace('\n', '') + f' **{self.queue[self.current_turn]}**'
+        return message
+
+
 # TODO add this for ending song https://www.youtube.com/watch?v=6FJXjJeOU6Q
 # TODO add this to elven lands <url>https://www.youtube.com/watch?v=HJLaTSjnd9Q</url>
+# TODO https://www.youtube.com/watch?v=PuRFNzizkXs

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <npc>
+        <Name>Mouse guild representative</Name>
+        <Boss>0</Boss>
+        <Image>iriy/mouse_guild.jpg</Image>
+        <Mechanics>None</Mechanics>
+        <Bestiary>Those who are cornered are joining this guild.</Bestiary>
+    </npc>
+</root>

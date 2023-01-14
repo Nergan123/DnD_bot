@@ -159,6 +159,7 @@
             <url>https://www.youtube.com/watch?v=SiyOajnJnTg</url>
         </music_battle>
         <NPC name="Drekavac">forest/drekavac.xml</NPC>
+        <NPC name="Baba_Yaga">hut/yaga.xml</NPC>
     </location>
     <location Name="Hut" image="hut/inside.jpg">
         <music_calm>
@@ -183,5 +184,68 @@
             <url>https://www.youtube.com/watch?v=83QgzvgzCIA</url>
         </music_battle>
         <NPC name="Rider">hut/rider.xml</NPC>
+    </location>
+    <location Name="Iriy" image="iriy/iriy.jpg">
+        <music_calm>
+            <url>https://www.youtube.com/watch?v=x_9pslQU9Bk</url>
+            <url>https://www.youtube.com/watch?v=a71NT6umCEo</url>
+            <url>https://www.youtube.com/watch?v=Ze2NiBA-YLA</url>
+        </music_calm>
+        <music_battle>
+            <url>https://www.youtube.com/watch?v=lCbwe7h9kkE</url>
+            <url>https://www.youtube.com/watch?v=cXk_inWxU1s</url>
+            <url>https://www.youtube.com/watch?v=VrdAp0L67iI</url>
+            <url>https://www.youtube.com/watch?v=HLQ2yXa4Uc0</url>
+        </music_battle>
+        <NPC name="Guard">iriy/guard.xml</NPC>
+        <NPC name="Citizen_m">iriy/citizen_m.xml</NPC>
+        <NPC name="Citizen_f">iriy/citizen_f.xml</NPC>
+    </location>
+    <location Name="Entry_district" image="iriy/entry_district.jpg">
+        <music_calm>
+            <url>https://www.youtube.com/watch?v=WQD-mc07HlQ</url>
+            <url>https://www.youtube.com/watch?v=Za4Xjfio9ks</url>
+            <url>https://www.youtube.com/watch?v=-JTTtcF7_Ag</url>
+        </music_calm>
+        <music_battle>
+            <url>https://www.youtube.com/watch?v=21rHTJdsqTw</url>
+            <url>https://www.youtube.com/watch?v=CHKkfKSwYTM</url>
+            <url>https://www.youtube.com/watch?v=VrdAp0L67iI</url>
+            <url>https://www.youtube.com/watch?v=HLQ2yXa4Uc0</url>
+        </music_battle>
+        <NPC name="Guard">iriy/guard.xml</NPC>
+        <NPC name="Citizen_m">iriy/citizen_m.xml</NPC>
+        <NPC name="Citizen_f">iriy/citizen_f.xml</NPC>
+        <NPC name="House_Belina">iriy/belina.xml</NPC>
+    </location>
+    <location Name="Industrial_district" image="iriy/industrial_district.jpg">
+        <music_calm>
+            <url>https://www.youtube.com/watch?v=7jbii4CytGA</url>
+            <url>https://www.youtube.com/watch?v=PapkbBp2_u0</url>
+            <url>https://www.youtube.com/watch?v=QAg3HOBZpvw</url>
+        </music_calm>
+        <music_battle>
+            <url>https://www.youtube.com/watch?v=P29hggUXm_s</url>
+            <url>https://www.youtube.com/watch?v=fhAI-cI9pX4</url>
+            <url>https://www.youtube.com/watch?v=2X4fZMkWwFQ</url>
+        </music_battle>
+        <NPC name="Guard">iriy/guard.xml</NPC>
+        <NPC name="Citizen_m">iriy/citizen_m.xml</NPC>
+        <NPC name="Citizen_f">iriy/citizen_f.xml</NPC>
+        <NPC name="House_Krasin">iriy/krasin.xml</NPC>
+    </location>
+    <location Name="Slum_area" image="iriy/poor_district.jpg">
+        <music_calm>
+            <url>https://www.youtube.com/watch?v=UlbxDQMo1o4</url>
+            <url>https://www.youtube.com/watch?v=SOgsWykNWww</url>
+            <url>https://www.youtube.com/watch?v=JS54yn7ZIZc</url>
+        </music_calm>
+        <music_battle>
+            <url>https://www.youtube.com/watch?v=fwW6DGYEw88</url>
+        </music_battle>
+        <NPC name="Guard">iriy/guard.xml</NPC>
+        <NPC name="Citizen_m">iriy/citizen_m.xml</NPC>
+        <NPC name="Citizen_f">iriy/citizen_f.xml</NPC>
+        <NPC name="Mouse_guild">iriy/mouse_guild.xml</NPC>
     </location>
 </root>
