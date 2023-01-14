@@ -7,6 +7,7 @@ class Parser:
     def __init__(self, campaign='', path=''):
         self.campaign = campaign
         self.path = os.path.join(path, 'campaign', self.campaign, 'map.xml')
+        print(self.path)
         self.path_npc_xml = os.path.join(path, 'campaign', self.campaign)
 
     def get_music(self, location='', battle=False):
