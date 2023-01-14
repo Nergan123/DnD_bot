@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <npc>
+        <Name>Werewolf</Name>
+        <Boss>0</Boss>
+        <Image>camp/wolf.jpg</Image>
+        <Mechanics>None</Mechanics>
+        <Bestiary>He used to be a human once.</Bestiary>
+    </npc>
+</root>

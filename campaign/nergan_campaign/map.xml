@@ -248,4 +248,20 @@
         <NPC name="Citizen_f">iriy/citizen_f.xml</NPC>
         <NPC name="Mouse_guild">iriy/mouse_guild.xml</NPC>
     </location>
+    <location Name="Camp" image="camp/camp.jpg">
+        <music_calm>
+            <url>https://www.youtube.com/watch?v=HPL1BmZ_EIw</url>
+            <url>https://www.youtube.com/watch?v=5tbBMz0KzWE</url>
+            <url>https://www.youtube.com/watch?v=EUer-Tto1ZA</url>
+        </music_calm>
+        <music_battle>
+            <url>https://www.youtube.com/watch?v=7UZAouOzUuQ</url>
+            <url>https://www.youtube.com/watch?v=z2iSqQWGFxA</url>
+        </music_battle>
+        <NPC name="Albert">camp/albert.xml</NPC>
+        <NPC name="Bjorn">camp/bjorn.xml</NPC>
+        <NPC name="Ingmar">camp/ingmar.xml</NPC>
+        <NPC name="Rohan">camp/rohan.xml</NPC>
+        <NPC name="Werewolf">camp/wolf.xml</NPC>
+    </location>
 </root>

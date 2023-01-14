@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <npc>
+        <Name>Ingmar</Name>
+        <Boss>0</Boss>
+        <Image>camp/ingmar.jpg</Image>
+        <Mechanics>None</Mechanics>
+        <Bestiary>Payed pretty badly.</Bestiary>
+    </npc>
+</root>
