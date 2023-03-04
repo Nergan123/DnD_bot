@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <npc>
+        <Name>Deacon</Name>
+        <Boss>0</Boss>
+        <Image>church/deacon.jpg</Image>
+        <Mechanics>None</Mechanics>
+        <Bestiary>Lowest rank in this church</Bestiary>
+    </npc>
+</root>

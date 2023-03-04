@@ -8,7 +8,7 @@ from discord.utils import get
 from discord import FFmpegPCMAudio
 from discord import PCMVolumeTransformer
 from discord import File
-from youtube_dl import YoutubeDL
+from yt_dlp import YoutubeDL
 from Dandy import Dandy_bot
 
 
@@ -26,8 +26,8 @@ async def on_ready():
         mechanics_message.start()
 
 
-@bot.command(name='dice',
-             help='Rolls the dice. Command example "!dice 2d6"')
+@bot.command(name='roll',
+             help='Rolls the dice. Command example "!roll 2d6"')
 async def roll(ctx, message):
     if not Dandy.initiative:
         role = get(ctx.guild.roles, name="DM")
@@ -323,7 +323,7 @@ async def battle(ctx):
         role = get(ctx.guild.roles, name="DM")
         await bot.wait_for('message',
                            check=lambda x: ((x.author.id == player_id) or (role in x.author.roles)) and
-                           x.content == '!dice 1d20',
+                           x.content == '!roll 1d20',
                            timeout=None,
                            )
         ini = 0
@@ -340,7 +340,7 @@ async def battle(ctx):
     role = get(ctx.guild.roles, name="DM")
     await bot.wait_for('message',
                        check=lambda x: role in x.author.roles and
-                       x.content == '!dice 1d20',
+                       x.content == '!roll 1d20',
                        timeout=None,
                        )
     val = random.randint(1, 20)

@@ -4,7 +4,7 @@
         <Name>Werewolf</Name>
         <Boss>0</Boss>
         <Image>camp/wolf.jpg</Image>
-        <Mechanics>None</Mechanics>
+        <Mechanics>Sanity</Mechanics>
         <Bestiary>He used to be a human once.</Bestiary>
     </npc>
 </root>

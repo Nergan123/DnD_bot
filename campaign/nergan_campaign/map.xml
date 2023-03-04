@@ -264,4 +264,17 @@
         <NPC name="Rohan">camp/rohan.xml</NPC>
         <NPC name="Werewolf">camp/wolf.xml</NPC>
     </location>
+    <location Name="Church_city" image="church/church.jpg">
+        <music_calm>
+            <url>https://www.youtube.com/watch?v=cWaab7FQ61Q</url>
+            <url>https://www.youtube.com/watch?v=1XGWoClCt24</url>
+        </music_calm>
+        <music_battle>
+            <url>https://www.youtube.com/watch?v=Xz5JkC446C8</url>
+            <url>https://www.youtube.com/watch?v=kNXR68rcsOY</url>
+        </music_battle>
+        <NPC name="Guard">iriy/guard.xml</NPC>
+        <NPC name="Priest">church/priest.xml</NPC>
+        <NPC name="Deacon">church/deacon.xml</NPC>
+    </location>
 </root>
