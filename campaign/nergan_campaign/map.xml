@@ -217,6 +217,7 @@
         <NPC name="Citizen_m">iriy/citizen_m.xml</NPC>
         <NPC name="Citizen_f">iriy/citizen_f.xml</NPC>
         <NPC name="House_Belina">iriy/belina.xml</NPC>
+        <NPC name="Gluttony">festival/gluttony.xml</NPC>
     </location>
     <location Name="Industrial_district" image="iriy/industrial_district.jpg">
         <music_calm>
@@ -233,6 +234,7 @@
         <NPC name="Citizen_m">iriy/citizen_m.xml</NPC>
         <NPC name="Citizen_f">iriy/citizen_f.xml</NPC>
         <NPC name="House_Krasin">iriy/krasin.xml</NPC>
+        <NPC name="Gluttony">festival/gluttony.xml</NPC>
     </location>
     <location Name="Slum_area" image="iriy/poor_district.jpg">
         <music_calm>
@@ -247,6 +249,7 @@
         <NPC name="Citizen_m">iriy/citizen_m.xml</NPC>
         <NPC name="Citizen_f">iriy/citizen_f.xml</NPC>
         <NPC name="Mouse_guild">iriy/mouse_guild.xml</NPC>
+        <NPC name="Gluttony">festival/gluttony.xml</NPC>
     </location>
     <location Name="Camp" image="camp/camp.jpg">
         <music_calm>
@@ -277,6 +280,7 @@
         <NPC name="Guard">iriy/guard.xml</NPC>
         <NPC name="Priest">church/priest.xml</NPC>
         <NPC name="Deacon">church/deacon.xml</NPC>
+        <NPC name="Gluttony">festival/gluttony.xml</NPC>
     </location>
     <location Name="Festival" image="festival/festival.jpg">
         <music_calm>
