@@ -6,3 +6,4 @@ archive
 .dockerignore
 *.json
 players
+__pycache__

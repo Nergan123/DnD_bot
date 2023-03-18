@@ -263,6 +263,7 @@
         <NPC name="Ingmar">camp/ingmar.xml</NPC>
         <NPC name="Rohan">camp/rohan.xml</NPC>
         <NPC name="Werewolf">camp/wolf.xml</NPC>
+        <NPC name="Boar">beginning/boar.xml</NPC>
     </location>
     <location Name="Church_city" image="church/church.jpg">
         <music_calm>
@@ -276,5 +277,21 @@
         <NPC name="Guard">iriy/guard.xml</NPC>
         <NPC name="Priest">church/priest.xml</NPC>
         <NPC name="Deacon">church/deacon.xml</NPC>
+    </location>
+    <location Name="Festival" image="festival/festival.jpg">
+        <music_calm>
+            <url>https://www.youtube.com/watch?v=a7PxxhhzRHE</url>
+            <url>https://www.youtube.com/watch?v=bYg5FK237qY</url>
+            <url>https://www.youtube.com/watch?v=Oeo2VCCtUZQ</url>
+        </music_calm>
+        <music_battle>
+            <url>https://www.youtube.com/watch?v=4r_5A6K7gu0</url>
+        </music_battle>
+        <NPC name="Guard">iriy/guard.xml</NPC>
+        <NPC name="Priest">church/priest.xml</NPC>
+        <NPC name="Citizen_m">iriy/citizen_m.xml</NPC>
+        <NPC name="Citizen_f">iriy/citizen_f.xml</NPC>
+        <NPC name="Helga">festival/helga.xml</NPC>
+        <NPC name="Gluttony">festival/gluttony.xml</NPC>
     </location>
 </root>
