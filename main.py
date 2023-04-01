@@ -1,6 +1,7 @@
 import os
 import time
 import random
+import discord
 from config import settings
 from dotenv import load_dotenv
 from discord.ext import commands, tasks
@@ -14,7 +15,7 @@ from Dandy import Dandy_bot
 
 load_dotenv()
 token = os.getenv('Token')
-bot = commands.Bot(command_prefix=settings['prefix'])
+bot = commands.Bot(command_prefix=settings['prefix'], intents=discord.Intents.all())
 Dandy = Dandy_bot()
 
 
@@ -465,7 +466,6 @@ async def mechanics_message():
                     await channel.send(file=picture, delete_after=timer)
 
 
-@bot.command(pass_context=True)
 async def play_nightmare():
 
     YDL_OPTIONS = {'format': 'bestaudio', 'noplaylist': 'True'}

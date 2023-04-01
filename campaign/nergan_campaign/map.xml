@@ -281,6 +281,7 @@
         <NPC name="Priest">church/priest.xml</NPC>
         <NPC name="Deacon">church/deacon.xml</NPC>
         <NPC name="Gluttony">festival/gluttony.xml</NPC>
+        <NPC name="Razzda">church/razzda.xml</NPC>
     </location>
     <location Name="Festival" image="festival/festival.jpg">
         <music_calm>

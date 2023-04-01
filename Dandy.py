@@ -215,6 +215,7 @@ class Dandy_bot(Base_class):
         self.mechanics = ''
         self.bestiary = ''
         self.battle = False
+        self.initiative = False
         self.interaction_ongoing = False
         self.save_state()
 

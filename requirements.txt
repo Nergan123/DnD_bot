@@ -9,7 +9,7 @@ certifi==2022.12.7
 cffi==1.15.0
 chardet==4.0.0
 cryptography==37.0.2
-discord.py==1.7.3
+discord.py==2.2.2
 idna==3.3
 jmespath==1.0.0
 multidict==6.0.2
@@ -36,4 +36,4 @@ win-inet-pton==1.1.0
 wincertstore==0.2
 yarl==1.7.2
 youtube-dl==2021.12.17
-yt-dlp==2023.3.3
+yt-dlp==2023.3.4

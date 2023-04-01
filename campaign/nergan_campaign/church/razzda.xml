@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <npc>
+        <Name>Razzda Thes</Name>
+        <Boss>0</Boss>
+        <Image>church/razzda.png</Image>
+        <Mechanics>None</Mechanics>
+        <Bestiary>A father you should've had</Bestiary>
+    </npc>
+</root>
