@@ -200,6 +200,8 @@
         <NPC name="Guard">iriy/guard.xml</NPC>
         <NPC name="Citizen_m">iriy/citizen_m.xml</NPC>
         <NPC name="Citizen_f">iriy/citizen_f.xml</NPC>
+        <NPC name="Gluttony">festival/gluttony.xml</NPC>
+        <NPC name="Starvation">festival/starvation.xml</NPC>
     </location>
     <location Name="Entry_district" image="iriy/entry_district.jpg">
         <music_calm>
@@ -218,6 +220,8 @@
         <NPC name="Citizen_f">iriy/citizen_f.xml</NPC>
         <NPC name="House_Belina">iriy/belina.xml</NPC>
         <NPC name="Gluttony">festival/gluttony.xml</NPC>
+        <NPC name="Starvation">festival/starvation.xml</NPC>
+        <NPC name="Isabelle">festival/isabelle.xml</NPC>
     </location>
     <location Name="Industrial_district" image="iriy/industrial_district.jpg">
         <music_calm>
@@ -235,6 +239,7 @@
         <NPC name="Citizen_f">iriy/citizen_f.xml</NPC>
         <NPC name="House_Krasin">iriy/krasin.xml</NPC>
         <NPC name="Gluttony">festival/gluttony.xml</NPC>
+        <NPC name="Starvation">festival/starvation.xml</NPC>
     </location>
     <location Name="Slum_area" image="iriy/poor_district.jpg">
         <music_calm>
@@ -250,6 +255,7 @@
         <NPC name="Citizen_f">iriy/citizen_f.xml</NPC>
         <NPC name="Mouse_guild">iriy/mouse_guild.xml</NPC>
         <NPC name="Gluttony">festival/gluttony.xml</NPC>
+        <NPC name="Starvation">festival/starvation.xml</NPC>
     </location>
     <location Name="Camp" image="camp/camp.jpg">
         <music_calm>
@@ -281,6 +287,7 @@
         <NPC name="Priest">church/priest.xml</NPC>
         <NPC name="Deacon">church/deacon.xml</NPC>
         <NPC name="Gluttony">festival/gluttony.xml</NPC>
+        <NPC name="Starvation">festival/starvation.xml</NPC>
         <NPC name="Razzda">church/razzda.xml</NPC>
     </location>
     <location Name="Festival" image="festival/festival.jpg">
@@ -298,5 +305,24 @@
         <NPC name="Citizen_f">iriy/citizen_f.xml</NPC>
         <NPC name="Helga">festival/helga.xml</NPC>
         <NPC name="Gluttony">festival/gluttony.xml</NPC>
+        <NPC name="Starvation">festival/starvation.xml</NPC>
+    </location>
+    <location Name="Tavern_Iriy" image="tavern/tavern.jpg">
+        <music_calm>
+            <url>https://www.youtube.com/watch?v=vWZ2ZU7NmoE</url>
+            <url>https://www.youtube.com/watch?v=vyg5jJrZ42s</url>
+            <url>https://www.youtube.com/watch?v=fxv6XFJxGIs</url>
+        </music_calm>
+        <music_battle>
+            <url>https://www.youtube.com/watch?v=ZR-QiwAln1Q</url>
+            <url>https://www.youtube.com/watch?v=RdYH-5RXCno</url>
+            <url>https://www.youtube.com/watch?v=Ov-iimrz_v8</url>
+        </music_battle>
+        <NPC name="Guard">iriy/guard.xml</NPC>
+        <NPC name="Citizen_m">iriy/citizen_m.xml</NPC>
+        <NPC name="Citizen_f">iriy/citizen_f.xml</NPC>
+        <NPC name="Helga">festival/helga.xml</NPC>
+        <NPC name="Gluttony">festival/gluttony.xml</NPC>
+        <NPC name="Starvation">festival/starvation.xml</NPC>
     </location>
 </root>

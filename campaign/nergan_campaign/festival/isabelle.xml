@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+    <npc>
+        <Name>Isabelle</Name>
+        <Boss>0</Boss>
+        <Image>festival/Isabelle.jpeg</Image>
+        <Mechanics>None</Mechanics>
+        <Bestiary>Receptionist of the Adventurers guild</Bestiary>
+    </npc>
+</root>

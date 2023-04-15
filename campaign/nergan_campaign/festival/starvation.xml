@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
     <npc>
-        <Name>Gluttony</Name>
+        <Name>Starvation</Name>
         <Boss>0</Boss>
-        <Image>festival/gluttony.jpg</Image>
-        <Mechanics>Nightmare</Mechanics>
+        <Image>festival/starvation.jpg</Image>
+        <Mechanics>None</Mechanics>
         <Bestiary>What has happened to him?</Bestiary>
     </npc>
 </root>
